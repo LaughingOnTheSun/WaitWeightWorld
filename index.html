@@ -1,0 +1,2710 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">   
+ <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>  
+	<link type = 'text/css' rel = 'stylesheet' href = 'eatWorld.css'>    
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Eat World</title>
+</head>
+
+<body>
+    
+    
+    
+
+ 
+<p id = 'hiScore'>HI-SCORE</p>
+    <p id = 'hiScoreNum'>0</p>
+    
+<img id = 'charPicture' src = 'models/Portrait_Hero1.png'>
+    
+<div id = 'wrapper'>
+    
+    <!--//player//-->
+    
+    
+     <img id = 'tree' src = "models/JusttheTREE600.gif">
+
+        
+    
+    <img id = 'theLand' class = 'backgrounds' src = 'models/TerrainWithoutTreewDIRT2600NoPadding.gif'>
+    
+    <img id = 'snowMan' src = 'models/SnowMan.gif'>
+    
+    <img id = 'flame1' class = 'flames' src = 'models/BasicFlame.gif'>
+    <img id = 'flame2' class = 'flames' src = 'models/BasicFlame.gif'>
+    
+    
+   <img id = 'diamond1' class = 'diamonds' src = 'models/EatWorldDIAMONDGreen200.gif'>
+    <img id = 'diamond2' class = 'diamonds' src = 'models/EatWorldDIAMONDGreen200.gif'>
+    <img id = 'diamond3' class = 'diamonds' src = 'models/EatWorldDIAMONDGreen200.gif'>
+    <img id = 'diamond4' class = 'diamonds' src = 'models/EatWorldDIAMONDGreen200.gif'>
+    <img id = 'diamond5' class = 'diamonds' src = 'models/EatWorldDIAMONDGreen200.gif'>
+    
+    
+    <img id = 'monster1' class = 'monsterSet1' src = 'models/SlimeWalkAnimationSLIMER1.gif'>
+    <img id = 'monster2' class = 'monsterSet1' src = 'models/SlimeWalkAnimationSLIMER1PINK.gif'>
+    <img id = 'monster3' class = 'monsterSet1' src = 'models/SlimeWalkAnimationSLIMERGOLD1new.gif'>
+    <img id = 'monster4' class = 'monsterSet2' src = 'models/SlimeWalkAnimationSLIMER1.gif'>
+    <img id = 'monster5' class = 'monsterSet1' src = 'models/SlimeWalkAnimationSLIMER1PINK.gif'>
+    <img id = 'monster6' class = 'monsterSet2' src = 'models/SlimeWalkAnimationSLIMERGOLD1new.gif'>
+    
+    <div id = 'player1'><p id = 'atkNum'>5</p><img id = 'player1img' src = 'models/EatEatWorldPLAYERIdleRight200.gif'></div>
+    
+    <img id = 'flame3' class = 'flames' src = 'models/BasicFlame.gif'>
+    <img id = 'flame4' class = 'flames' src = 'models/BasicFlame.gif'>
+   
+    <img id = 'birds' src = 'models/Birds50.gif'>
+    
+   
+    <img id = 'bubbleWorldMorph' src = 'models/bubble_Grass.gif'>
+    
+    
+    
+    
+
+   
+    
+
+  
+    
+    
+
+    
+   
+    
+    
+    </div>
+    <p id = 'gameOver'>Game<br>Over</p>
+    
+    <img id = 'heart3' class = 'hearts' src = "models/heart.png">
+    <img id = 'heart2' class = 'hearts' src = "models/heart.png">
+    <img id = 'heart1' class = 'hearts' src = "models/heart.png">
+    
+  
+    
+    
+    
+    <p id = 'weight'>WEIGHT</p>
+    <p id = 'weightNum'>0</p>
+    
+    <p id = 'score'>SCORE</p>
+    <p id = 'scoreNum'>0</p>
+    <p id = 'playerXPosition' class = 'positionText'>Test</p>
+    <p id = 'playerYPosition' class = 'positionText'>Test</p>
+    
+    <p id = 'monster1XPosition' class = 'positionText'>Test</p>
+    <p id = 'monster1HP' class = 'positionText'>Test</p>
+    
+    <p id = 'monster2XPosition' class = 'positionText'>Test</p>
+    <p id = 'monster2HP' class = 'positionText'>Test</p>
+    
+    <p id = 'monster3XPosition' class = 'positionText'>Test</p>
+    <p id = 'monster3HP' class = 'positionText'>Test</p>
+    
+    <p id = 'monster4XPosition' class = 'positionText'>Test</p>
+    <p id = 'monster4HP' class = 'positionText'>Test</p>
+    
+    <p id = 'monster5XPosition' class = 'positionText'>Test</p>
+    <p id = 'monster5HP' class = 'positionText'>Test</p>
+    
+    <p id = 'monster6XPosition' class = 'positionText'>Test</p>
+    <p id = 'monster6HP' class = 'positionText'>Test</p>
+    
+     <p id = 'monsterCount' class = 'positionText'>Monster Count</p>
+    
+
+    
+    <script>
+        
+
+       
+        
+       var keyState = {};    
+window.addEventListener('keydown',function(e){
+    keyState[e.keyCode || e.which] = true;
+},true);    
+window.addEventListener('keyup',function(e){
+    keyState[e.keyCode || e.which] = false;
+},true);
+
+x = 100;
+
+function gameLoop() {
+    if (keyState[37]){
+        x -= 1;
+    }    
+    if (keyState[37]){
+        x += 1;
+    }
+    if (keyState[37]){
+        x -= 1;
+    }    
+    if (keyState[37]){
+        x += 1;
+    }
+
+    // redraw/reposition your object here
+    // also redraw/animate any objects not controlled by the user
+
+    setTimeout(gameLoop, 10);
+}    
+gameLoop();
+        //movementZone1
+        
+   var change = {
+  65: {
+    left: "-=2.5%"
+  },
+
+  87: {
+    top: "-=2.5%"
+      
+  },
+
+  68: {
+    left: "+=2.5%"
+  },
+      
+}
+   
+$(document).on({
+  keydown: keydown,
+  keyup: keyup
+})
+
+var movement = []
+
+function keydown(e) {
+    
+  var key = e.which
+  
+  var animation = change[key];
+  if (!movement[key]) { // watch out for repeating keys!
+    movement[key] = setInterval(keepGoing1, 20)
+  }
+
+  //  console.log("down", key, movement[key])
+    function keepGoing1(){
+        if(((playerPositionX <= 1500)&&(playerPositionX >= -77)&&(playerPositionY <= 111)&&(playerPositionY >= -25))&&(playerCurrentZone == 1)){
+            keepGoing();
+            
+    }
+        
+    
+  function keepGoing() {
+    $("#player1").css(animation)
+  }
+        
+    }
+}
+
+function keyup(e) {
+  var key = e.which
+  movement[key] = clearInterval(movement[key])
+    //  console.log("up", key, movement[key])
+  
+
+}
+        
+       //more movement x and y axis
+        
+        var keyState = {};    
+window.addEventListener('keydown',function(e){
+    keyState[e.keyCode || e.which] = true;
+},true);    
+        
+window.addEventListener('keyup',function(e){
+    keyState[e.keyCode || e.which] = false;
+},true);
+
+
+        
+var playerGoingToIdle = function(){
+    if(playerDirection == 'left'){
+        $('#player1').attr('src','models/EatEatWorldPLAYERIdleLeft200.gif');
+    }
+    if(playerDirection == 'right'){
+        $('#player1').attr('src','models/EatEatWorldPLAYERIdleRight200.gif');
+    }
+}
+        
+var playerPositionX = 0;
+var playerPositionY = 0;
+
+var playerDirection = 'front';
+
+var playerSetToIdleL = function(){
+    $('#player1img').attr('src','models/EatEatWorldPLAYERIdleLeft200.gif');
+}   
+
+var playerSetToIdleR = function(){
+    $('#player1img').attr('src','models/EatEatWorldPLAYERIdleRight200.gif');
+}   
+        
+var playerFacingFuncL = function(){
+    
+    if((playerDirection == 'left')&&(playerCurrentZone == 1)){
+        $('#player1img').attr('src','models/EatEatWorldPLAYERWalkLefttSwordUnSheated200.gif');
+        clearInterval(playerFacingFuncR);
+        $('#atkNum').css('left','30%');
+    }
+    
+   
+    
+}       
+
+var playerFacingFuncR = function(){
+    
+    if((playerDirection == 'right')&&(playerCurrentZone == 1)){
+         $('#player1img').attr('src','models/EatEatWorldPLAYERWalkRightSwordUnSheated200Longer.gif');
+        clearInterval(playerFacingFuncL);
+        $('#atkNum').css('left','65%');
+      
+    }
+    
+}       
+        
+
+function gameLoop() {
+    if (((((keyState[37] || keyState[65])&&(playerPositionX >= -77))&&(playerPositionY >= -25))&&(playerPositionY <= 111))&&(playerCurrentZone == 1)){
+        playerPositionX -= 1;
+        
+        goDown();
+         document.getElementById('playerXPosition').innerHTML = 'Player X position = '+ playerPositionX;
+        
+
+        
+        
+    }    
+    if (((((keyState[39] || keyState[68])&&(playerPositionX <= 1500))&&(playerPositionY >= -25))&&(playerPositionY <= 111))&&(playerCurrentZone == 1)){
+        playerPositionX += 1;
+        
+        goDown();
+         document.getElementById('playerXPosition').innerHTML = 'Player X position = '+ playerPositionX;
+        
+
+       
+       
+    }
+    if ((((keyState[38] || keyState[87])&&(playerPositionY <= 111))&&(playerPositionX >= -500))&&(playerPositionX <= 472)){
+        
+        
+       
+         document.getElementById('playerYPosition').innerHTML = 'Player Y position = '+ playerPositionY;
+        
+    }    
+    
+    
+
+    // redraw/reposition your object here
+    // also redraw/animate any objects not controlled by the user
+
+    setTimeout(gameLoop, 1);
+}    
+
+                
+
+document.onkeydown = checkKey;
+
+function checkKey(e) {
+
+    e = e || window.event;
+    
+    if (e.keyCode == '87'){
+        playerDirection = 'front';
+      
+        
+        
+    }
+   
+    if (e.keyCode == '65'){
+        playerDirection = 'left';
+        
+     
+
+        
+        
+    }
+    if (e.keyCode == '68'){
+        playerDirection = 'right';
+    
+      
+        
+    }
+    
+    
+
+ 
+    
+    
+    
+   
+    if (((e.keyCode == '87')&&(playerPositionY < 15))&&(playerCurrentZone == 2)){
+        // W key (up)//
+        
+        playerPositionY++;
+        document.getElementById('playerYPosition').innerHTML = 'Player Y position = '+ playerPositionY;
+        document.getElementById('playerXPosition').innerHTML = 'Player X position = '+ playerPositionX;
+	
+              
+    }
+  
+    if (((e.keyCode == '65')&&(playerPositionX > -2))&&(playerCurrentZone == 2)) {
+       // A key (left)//
+      
+        playerPositionX--;
+        document.getElementById('playerYPosition').innerHTML = 'Player Y position = '+ playerPositionY;
+        document.getElementById('playerXPosition').innerHTML = 'Player X position = '+ playerPositionX;
+        
+       
+       
+    }
+    if (((e.keyCode == '68')&&(playerPositionX < 13))&&(playerCurrentZone == 2)) {
+       // D key (right)//
+       
+		playerPositionX++;
+        document.getElementById('playerYPosition').innerHTML = 'Player Y position = '+ playerPositionY;
+        document.getElementById('playerXPosition').innerHTML = 'Player X position = '+ playerPositionX;
+        
+     
+    }
+    if (((e.keyCode == '81')&&(playerDirection == 'left'))&&(playerCurrentZone == 1)) {
+       // Q key (right)// 
+        playerCurrentZone = 2;
+      $('#player1img').attr('src','models/EatEatWorldPLAYERATTACKLeftx200.gif');  
+        playerAttacksMon1();
+        playerAttacksMon2();
+        playerAttacksMon3();
+        playerAttacksMon4();
+        playerAttacksMon5();
+        playerAttacksMon6();
+      setTimeout(backToIdleAndWalk,1000);
+    
+        
+	
+        
+    }
+    if (((e.keyCode == '81')&&(playerDirection == 'right'))&&(playerCurrentZone == 1)) {
+       // Q key (right)//
+        playerCurrentZone = 2;
+       $('#player1img').attr('src','models/EatEatWorldPLAYERRightATTACK200.gif'); 
+        playerAttacksMon1();
+        playerAttacksMon2();
+        playerAttacksMon3();
+        playerAttacksMon4();
+        playerAttacksMon5();
+        playerAttacksMon6();
+        setTimeout(backToIdleAndWalk,1000);
+		
+    }
+    if (((e.keyCode == '69')&&(playerDirection == 'right'))&&(playerCurrentZone == 1)) {
+       // Q key (right)//
+        playerCurrentZone = 3;
+       $('#player1img').attr('src','models/EatEatWorldPLAYERIdleRight200.gif'); 
+      
+    }
+    if (((e.keyCode == '69')&&(playerDirection == 'left'))&&(playerCurrentZone == 1)) {
+       // Q key (right)//
+        playerCurrentZone = 3;
+       $('#player1img').attr('src','models/EatEatWorldPLAYERIdleLeft200.gif'); 
+      
+    }
+     if ((e.keyCode == '65')&&(playerCurrentZone == 3)) {
+       // A key (left)//
+      playerCurrentZone = 1;
+        playerPositionX--;
+        document.getElementById('playerYPosition').innerHTML = 'Player Y position = '+ playerPositionY;
+        document.getElementById('playerXPosition').innerHTML = 'Player X position = '+ playerPositionX;
+        
+       
+       
+    }
+    if ((e.keyCode == '68')&&(playerCurrentZone == 3)) { 
+       // D key (right)//
+       playerCurrentZone = 1;
+		playerPositionX++;
+        document.getElementById('playerYPosition').innerHTML = 'Player Y position = '+ playerPositionY;
+        document.getElementById('playerXPosition').innerHTML = 'Player X position = '+ playerPositionX;
+        
+     
+    }
+    
+}    
+        
+
+
+        //movement
+       
+        
+        //Turning Back to Idle/Walk animation from Slash;
+        
+        var backToIdleAndWalk = function(){
+            if(playerDirection == 'left'){
+                $('#player1img').attr('src','models/EatEatWorldPLAYERWalkLefttSwordUnSheated200.gif');
+                playerCurrentZone = 1;
+            }
+            if(playerDirection == 'right'){
+                $('#player1img').attr('src','models/EatEatWorldPLAYERWalkRightSwordUnSheated200.gif');
+                playerCurrentZone = 1;
+            }
+        }
+        
+   
+        
+        //player position//
+        var playerScore = 0;
+        var playerHiScore = 0;
+        
+        var playerHeartValue = 3;
+        
+        var worldType = 'grass';
+        var bubbleType = 'none';
+        
+        var landWeight = 0;
+        var landWeightMonsterCount = 0;
+        var landWeightItemCount = 0;
+        
+        var playerCurrentZone = 1;
+        
+        var playerLevelStat = 1;
+        var playerLevelVariable = 0;
+        
+        
+   
+        //up and down terrain
+        
+        //Highest <247
+        //247 - 306 
+        //306 - 390
+        //390 - 780
+        //780 - 1009 
+        //1009 - 1129
+        //bubble leaves after long wait
+        
+        var bubbleWorldLeaves = function(){
+            bubbleType = 'none';
+            $('#bubbleWorldMorph').fadeOut(300);
+        }
+        
+        //bubble Func
+        var bubbleWorldAppears = function(){
+            var whichBubbleAppears = Math.floor(Math.random()*5+1);
+            if(((whichBubbleAppears == 3)&&(bubbleType == 'none'))&&(worldType != 'grass')){
+              
+                bubbleType = 'grass';
+                $('#bubbleWorldMorph').attr('src','models/bubble_Grass.gif');
+                $('#bubbleWorldMorph').fadeIn(300);
+                setTimeout(bubbleWorldLeaves,4000);
+             
+            }
+            if(((whichBubbleAppears == 4)&&(bubbleType == 'none'))&&(worldType != 'ice')){
+              
+                bubbleType = 'ice';
+                $('#bubbleWorldMorph').attr('src','models/bubble_Ice.gif');
+                $('#bubbleWorldMorph').fadeIn(300);
+                setTimeout(bubbleWorldLeaves,4000);
+                
+            }
+            if(((whichBubbleAppears == 5)&&(bubbleType == 'none'))&&(worldType != 'fire')){
+            
+                bubbleType = 'fire';
+                $('#bubbleWorldMorph').attr('src','models/bubble_Fire.gif');
+                $('#bubbleWorldMorph').fadeIn(300);
+                setTimeout(bubbleWorldLeaves,4000);
+                
+            }
+        }
+        
+        
+        //grabbing Morph Bubble
+        
+        var landingOnMorphBubble = function(){
+            if(((playerPositionX >= 840)&&(playerPositionX <= 1040))&&(bubbleType == 'grass')){
+                worldType = 'grass';
+                morphWorldFinal();
+                bubbleType = 'none';
+                $('#bubbleWorldMorph').fadeOut(300);
+               
+            }
+            if(((playerPositionX >= 840)&&(playerPositionX <= 1040))&&(bubbleType == 'ice')){
+                worldType = 'ice';
+                morphWorldFinal();
+                bubbleType = 'none';
+                $('#bubbleWorldMorph').fadeOut(300);
+                
+            }
+            if(((playerPositionX >= 840)&&(playerPositionX <= 1040))&&(bubbleType == 'fire')){
+                worldType = 'fire';
+                morphWorldFinal();
+                bubbleType = 'none';
+                $('#bubbleWorldMorph').fadeOut(300);
+               
+            }
+        }
+    
+        //morph world
+        
+        var morphWorldHide = function(){
+            $('#theLand').hide();
+            $('#tree').hide();
+            $('#birds').hide();
+            $('#snowMan').hide();
+            $('.flames').hide();
+        }
+        
+        var morphWorldShow = function(){
+            $('#theLand').fadeIn(1);
+            $('#tree').fadeIn(1);
+        }
+        
+        var worldWhiteFadeIn = function(){
+            $('#theLand').attr('src','models/TerrainWithoutTreewDIRT2600NoPaddingWHITE.gif');
+            $('#tree').attr('src','models/JusttheTREE600WHITE.gif');
+        }
+        
+        var morphWorldFinal = function(){
+            morphWorldHide();
+            setTimeout(morphWorldShow,100);
+            setTimeout(morphWorldHide,150);
+            setTimeout(morphWorldShow,200);
+            setTimeout(morphWorldHide,250);
+            setTimeout(worldWhiteFadeIn,275);
+            setTimeout(morphWorldShow,300);
+            setTimeout(morphWorldHide,350);
+            setTimeout(morphWorldShow,400);
+            setTimeout(morphWorldHide,450);
+            setTimeout(morphWorldShow,500);
+            setTimeout(morphWorldHide,550);
+            setTimeout(worldTypeChange,575);
+            setTimeout(morphWorldShow,600);
+        }
+        
+        //world Type Change
+        
+        
+        var worldTypeChange = function(){
+            if(worldType == 'grass'){
+                $('#theLand').attr('src','models/TerrainWithoutTreewDIRT2600NoPadding.gif');
+                $('#tree').attr('src','models/JusttheTREE600.gif');
+                $('#birds').fadeIn(300);
+                $('#snowMan').fadeOut(100);
+                $('.flames').fadeOut(100); 
+            }
+            if(worldType == 'ice'){
+                $('#theLand').attr('src','models/TerrainWithoutTreewDIRT2600NoPaddingSNOW.gif');
+                $('#tree').attr('src','models/JusttheTREE600SNOW.gif');
+                $('#snowMan').fadeIn(300);
+                $('#birds').fadeOut(100);
+                $('.flames').fadeOut(100); 
+            }
+             if(worldType == 'fire'){
+                $('#theLand').attr('src','models/TerrainWithoutTreewDIRT2600NoPaddingFIRE.gif');
+                $('#tree').attr('src','models/JusttheTREE600FIRE.gif');
+                $('.flames').fadeIn(300); 
+                $('#birds').fadeOut(100);
+                 $('#snowMan').fadeOut(100);
+            }
+        }
+        
+        
+        //player going Idle
+        
+        var playerGoingIdle = function(){
+            if(playerDirection == 'left'){
+            $('#player1img').attr('src','models/EatEatWorldPLAYERIdleLeft200.gif');
+        }
+            if(playerDirection == 'right'){
+            $('#player1img').attr('src','models/EatEatWorldPLAYERIdleRight200.gif');
+        }
+        }
+        
+        //weight number change color
+        
+        var weightColor = function(){
+            if((landWeight >= 75)&&(landWeight <= 100)){
+                $('#weightNum').css('color','red');
+                $('#weightNum').css('font-size','400%');
+                $('#weightNum').css('top','11.8%');
+            }
+            if((landWeight >= 50)&&(landWeight <= 74)){
+                $('#weightNum').css('color','orange');
+                $('#weightNum').css('font-size','300%');
+                $('#weightNum').css('top','13.8%');
+            }
+            if((landWeight >= 25)&&(landWeight <= 49)){
+                $('#weightNum').css('color','yellow');
+                $('#weightNum').css('font-size','250%');
+                $('#weightNum').css('top','14.8%');
+            }
+            if((landWeight >= 0)&&(landWeight <= 24)){
+                $('#weightNum').css('color','white');
+                $('#weightNum').css('font-size','200%');
+                $('#weightNum').css('top','16%');
+            }
+        }
+        
+        //weight Going up per Count
+        
+        var monsterWeightGoesUp = function(){
+            if((landWeightMonsterCount >= 1)&&(landWeight <= 99)){
+                landWeight++;
+                document.getElementById('weightNum').innerHTML = landWeight+'%';
+                weightColor();
+            }
+            if((landWeightMonsterCount <= 0)&&(landWeight >= 1)){
+                landWeight--;
+                document.getElementById('weightNum').innerHTML = landWeight+'%';
+                landWeightMonsterCount = 0;
+                weightColor();
+            }
+            if(landWeight == 100){
+                gameOver();
+                landWeightMonsterCount = 0;
+                landWeight = 0;
+                document.getElementById('weightNum').innerHTML = landWeight+'%';
+                weightColor();
+            }
+            
+        }
+        
+        var playerFadesOut = function(){
+            $('#player1').fadeOut(500);
+            
+        }
+      
+        var playerDiesA = function(){
+            $('#player1').css('left','35%');
+            $('#player1').css('top','12%');
+            $('#player1').fadeIn(500);
+            playerPositionX = 0;
+            playerPositionY = 0;
+        }
+        
+        var playerDies = function(){
+            playerFadesOut()
+            setTimeout(playerDiesA,500);
+            playerLosesHeart();
+            
+        }
+        
+        var goDown = function(){
+             if((playerPositionX < 250)&&(playerPositionX >= -77)){
+                $('#player1').css('top','12%');
+            }
+            if((playerPositionX >= 250)&&(playerPositionX <= 306)){
+                $('#player1').css('top','12.5%');
+            }
+             if((playerPositionX >= 307)&&(playerPositionX <= 390)){
+                $('#player1').css('top','13%');
+            }
+             if((playerPositionX >= 391)&&(playerPositionX <= 825)){
+                $('#player1').css('top','14%');
+            }
+            if((playerPositionX >= 826)&&(playerPositionX <= 1009)){
+                $('#player1').css('top','14.5%');
+            }
+            if((playerPositionX >= 1010)&&(playerPositionX <= 1121)){
+                $('#player1').css('top','14%');
+            }
+            if((playerPositionX >= 1122)&&(playerPositionX <= 1400)){
+                $('#player1').css('top','13.5%');
+            }
+            if(playerPositionX <= -78){
+                $('#player1').animate({top:'+=55%'},900);
+                playerPositionX = -1000;
+                playerPositionY = -1000;
+                setTimeout(playerDies,900);
+            }
+             if(playerPositionX >= 1501){
+                $('#player1').animate({top:'+=55%'},900);
+                playerPositionX = -1000;
+                playerPositionY = -1000;
+                setTimeout(playerDies,900);
+            }
+            if(playerPositionX == 0){
+                $('#player1').css('left','35%');
+            }
+             if(playerPositionX == 100){
+                $('#player1').css('left','36.68%');
+            }
+            if(playerPositionX == 200){
+                $('#player1').css('left','38.36%');
+            }
+             if(playerPositionX == 300){
+                $('#player1').css('left','40.04%');
+            }
+            if(playerPositionX == 400){
+                $('#player1').css('left','41.64%');
+            }
+             if(playerPositionX == 500){
+                $('#player1').css('left','43.32%');
+            }
+            if(playerPositionX == 600){
+                $('#player1').css('left','45%');
+            }
+             if(playerPositionX == 700){
+                $('#player1').css('left','46.68%');
+            }
+             if(playerPositionX == 800){
+                $('#player1').css('left','48.36%');
+            }
+             if(playerPositionX == 900){
+                $('#player1').css('left','50.04%');
+            }
+            if(playerPositionX == 1000){
+                $('#player1').css('left','51.72%');
+            }
+             if(playerPositionX == 1100){
+                $('#player1').css('left','53.4%');
+            }
+            if(playerPositionX == 1200){
+                $('#player1').css('left','55.08%');
+            }
+             if(playerPositionX == 1300){
+                $('#player1').css('left','56.76%');
+            }
+            if(playerPositionX == 1400){
+                $('#player1').css('left','58.44%');
+            }
+           
+        }
+        
+      
+
+        
+        //PlayerInfo//
+        
+        document.getElementById('playerYPosition').innerHTML = 'Player Y position = '+ playerPositionY;
+        document.getElementById('playerXPosition').innerHTML = 'Player X position = '+ playerPositionX;
+   
+
+//diamond functions        
+        
+var diamondOnField1 = false;
+var diamondColor1 = 'green';        
+        
+var diamondOnField2 = false;
+var diamondColor2 = 'green';
+        
+var diamondOnField3 = false;
+var diamondColor3 = 'green';        
+        
+var diamondOnField4 = false;
+var diamondColor4 = 'green';        
+        
+var diamondOnField5 = false;  
+var diamondColor5 = 'green';        
+        
+        
+var diamondOnFieldTooLong1 = function(){
+    diamondOnField1 = false;
+    $('#diamond1').fadeOut(300);
+}        
+
+var diamondOnFieldTooLong2 = function(){
+    diamondOnField2 = false;
+    $('#diamond2').fadeOut(300);
+}        
+
+var diamondOnFieldTooLong3 = function(){
+    diamondOnField3 = false;
+    $('#diamond3').fadeOut(300);
+}        
+
+var diamondOnFieldTooLong4 = function(){
+    diamondOnField4 = false;
+    $('#diamond4').fadeOut(300);
+}        
+
+var diamondOnFieldTooLong5 = function(){
+    diamondOnField5 = false;
+    $('#diamond5').fadeOut(300);
+}        
+
+        
+var diamondAppear1 = function(){
+   var diamondRandomNum = Math.floor(Math.random()*40+1);
+if(diamondRandomNum <= 15){
+    diamondOnField1 = false;
+    $('#diamond1').fadeOut(300);
+}
+if((diamondRandomNum >= 16)&&(diamondRandomNum <= 26)){
+    diamondOnField1 = true;
+    diamondColor1 = 'green';
+    $('#diamond1').attr('src','models/EatWorldDIAMONDGreen200.gif');
+    $('#diamond1').fadeIn(300);
+    setTimeout(diamondOnFieldTooLong1,3000);
+}
+if((diamondRandomNum >= 27)&&(diamondRandomNum <= 34)){
+    diamondOnField1 = true;
+    diamondColor1 = 'blue';
+    $('#diamond1').attr('src','models/EatWorldDIAMONDBlue200.gif');
+    $('#diamond1').fadeIn(300);
+    setTimeout(diamondOnFieldTooLong1,3000);
+}    
+if((diamondRandomNum >= 35)&&(diamondRandomNum <= 39)){
+    diamondOnField1 = true;
+    diamondColor1 = 'red';
+    $('#diamond1').attr('src','models/EatWorldDIAMONDRed.gif');
+    $('#diamond1').fadeIn(300);
+    setTimeout(diamondOnFieldTooLong1,3000);
+}        
+if(diamondRandomNum == 40){
+    diamondOnField1 = true;
+    diamondColor1 = 'gold';
+    $('#diamond1').attr('src','models/EatWorldDIAMONDGold200.gif');
+    $('#diamond1').fadeIn(300);
+    setTimeout(diamondOnFieldTooLong1,3000);
+}            
+}        
+        
+var diamondAppear2 = function(){
+   var diamondRandomNum = Math.floor(Math.random()*40+1);
+if(diamondRandomNum <= 15){
+    diamondOnField2 = false;
+    $('#diamond2').fadeOut(300);
+}
+if((diamondRandomNum >= 16)&&(diamondRandomNum <= 26)){
+    diamondOnField2 = true;
+    diamondColor2 = 'green';
+    $('#diamond2').attr('src','models/EatWorldDIAMONDGreen200.gif');
+    $('#diamond2').fadeIn(300);
+    setTimeout(diamondOnFieldTooLong2,3000);
+}
+if((diamondRandomNum >= 27)&&(diamondRandomNum <= 34)){
+    diamondOnField2 = true;
+    diamondColor2 = 'blue';
+    $('#diamond2').attr('src','models/EatWorldDIAMONDBlue200.gif');
+    $('#diamond2').fadeIn(300);
+    setTimeout(diamondOnFieldTooLong2,3000);
+}    
+if((diamondRandomNum >= 35)&&(diamondRandomNum <= 39)){
+    diamondOnField2 = true;
+    diamondColor2 = 'red';
+    $('#diamond2').attr('src','models/EatWorldDIAMONDRed.gif');
+    $('#diamond2').fadeIn(300);
+    setTimeout(diamondOnFieldTooLong2,3000);
+}        
+if(diamondRandomNum == 40){
+    diamondOnField2 = true;
+    diamondColor2 = 'gold';
+    $('#diamond2').attr('src','models/EatWorldDIAMONDGold200.gif');
+    $('#diamond2').fadeIn(300);
+    setTimeout(diamondOnFieldTooLong2,3000);
+}            
+}        
+
+var diamondAppear3 = function(){
+   var diamondRandomNum = Math.floor(Math.random()*40+1);
+if(diamondRandomNum <= 15){
+    diamondOnField3 = false;
+    $('#diamond3').fadeOut(300);
+}
+if((diamondRandomNum >= 16)&&(diamondRandomNum <= 26)){
+    diamondOnField3 = true;
+    diamondColor3 = 'green';
+    
+    $('#diamond3').attr('src','models/EatWorldDIAMONDGreen200.gif');
+    $('#diamond3').fadeIn(300);
+    setTimeout(diamondOnFieldTooLong3,3000);
+}
+if((diamondRandomNum >= 27)&&(diamondRandomNum <= 34)){
+    diamondOnField3 = true;
+    diamondColor3 = 'blue';
+    
+    $('#diamond3').attr('src','models/EatWorldDIAMONDBlue200.gif');
+    $('#diamond3').fadeIn(300);
+    setTimeout(diamondOnFieldTooLong3,3000);
+}    
+if((diamondRandomNum >= 35)&&(diamondRandomNum <= 39)){
+    diamondOnField3 = true;
+    diamondColor3 = 'red';
+    
+    $('#diamond3').attr('src','models/EatWorldDIAMONDRed.gif');
+    $('#diamond3').fadeIn(300);
+    setTimeout(diamondOnFieldTooLong3,3000);
+}        
+if(diamondRandomNum == 40){
+    diamondOnField3 = true;
+    diamondColor3 = 'gold';
+    
+    $('#diamond3').attr('src','models/EatWorldDIAMONDGold200.gif');
+    $('#diamond3').fadeIn(300);
+    setTimeout(diamondOnFieldTooLong3,3000);
+}            
+}        
+
+var diamondAppear4 = function(){
+   var diamondRandomNum = Math.floor(Math.random()*40+1);
+if(diamondRandomNum <= 15){
+    diamondOnField4 = false;
+    $('#diamond4').fadeOut(300);
+}
+if((diamondRandomNum >= 16)&&(diamondRandomNum <= 26)){
+    diamondOnField4 = true;
+    diamondColor4 = 'green';
+    
+    $('#diamond4').attr('src','models/EatWorldDIAMONDGreen200.gif');
+    $('#diamond4').fadeIn(300);
+    setTimeout(diamondOnFieldTooLong4,3000);
+}
+if((diamondRandomNum >= 27)&&(diamondRandomNum <= 34)){
+    diamondOnField4 = true;
+    diamondColor4 = 'blue';
+    
+    $('#diamond4').attr('src','models/EatWorldDIAMONDBlue200.gif');
+    $('#diamond4').fadeIn(300);
+    setTimeout(diamondOnFieldTooLong4,3000);
+}    
+if((diamondRandomNum >= 35)&&(diamondRandomNum <= 39)){
+    diamondOnField4 = true;
+    diamondColor4 = 'red';
+    
+    $('#diamond4').attr('src','models/EatWorldDIAMONDRed.gif');
+    $('#diamond4').fadeIn(300);
+    setTimeout(diamondOnFieldTooLong4,3000);
+}        
+if(diamondRandomNum == 40){
+    diamondOnField4 = true;
+    diamondColor4 = 'gold';
+    
+    $('#diamond4').attr('src','models/EatWorldDIAMONDGold200.gif');
+    $('#diamond4').fadeIn(300);
+    setTimeout(diamondOnFieldTooLong4,3000);
+}            
+}       
+
+var diamondAppear5 = function(){
+   var diamondRandomNum = Math.floor(Math.random()*40+1);
+if(diamondRandomNum <= 15){
+    diamondOnField5 = false;
+    $('#diamond5').fadeOut(300);
+}
+if((diamondRandomNum >= 16)&&(diamondRandomNum <= 26)){
+    diamondOnField5 = true;
+    diamondColor5 = 'green';
+    
+    $('#diamond5').attr('src','models/EatWorldDIAMONDGreen200.gif');
+    $('#diamond5').fadeIn(300);
+    setTimeout(diamondOnFieldTooLong5,3000);
+}
+if((diamondRandomNum >= 27)&&(diamondRandomNum <= 34)){
+    diamondOnField5 = true;
+    diamondColor5 = 'blue';
+    
+    $('#diamond5').attr('src','models/EatWorldDIAMONDBlue200.gif');
+    $('#diamond5').fadeIn(300);
+    setTimeout(diamondOnFieldTooLong5,3000);
+}    
+if((diamondRandomNum >= 35)&&(diamondRandomNum <= 39)){
+    diamondOnField5 = true;
+    diamondColor5 = 'red';
+    
+    $('#diamond5').attr('src','models/EatWorldDIAMONDRed.gif');
+    $('#diamond5').fadeIn(300);
+    setTimeout(diamondOnFieldTooLong5,3000);
+}        
+if(diamondRandomNum == 40){
+    diamondOnField5 = true;
+    diamondColor5 = 'gold';
+    
+    $('#diamond5').attr('src','models/EatWorldDIAMONDGold200.gif');
+    $('#diamond5').fadeIn(300);
+    setTimeout(diamondOnFieldTooLong5,3000);
+}            
+}        
+
+
+
+var diamondFuncComplete = function(){
+    if(gameOverBool == false){
+    diamondAppear1();
+    diamondAppear2();
+    diamondAppear3();
+    diamondAppear4();
+    diamondAppear5();
+    }
+}
+
+var intervalCountScoreUp = function(){
+        soundCoinUp = new Audio('sfx/coinUpEatWorld.wav');
+        soundCoinUp.play();
+        playerScore++;
+        document.getElementById('scoreNum').innerHTML = playerScore;
+        
+}
+
+var diamondUpFuncGreen = function(){
+        intervalCountScoreUp();
+        setTimeout(intervalCountScoreUp,50);
+        setTimeout(intervalCountScoreUp,100);
+        setTimeout(intervalCountScoreUp,150);
+        setTimeout(intervalCountScoreUp,200);     
+    
+}
+
+var diamondUpFuncBlue = function(){
+        intervalCountScoreUp();
+        setTimeout(intervalCountScoreUp,50);
+        setTimeout(intervalCountScoreUp,100);
+        setTimeout(intervalCountScoreUp,150);
+        setTimeout(intervalCountScoreUp,200);  
+        setTimeout(intervalCountScoreUp,250);
+        setTimeout(intervalCountScoreUp,300);
+        setTimeout(intervalCountScoreUp,350);
+        setTimeout(intervalCountScoreUp,400);
+        setTimeout(intervalCountScoreUp,450);
+        
+}
+
+var diamondUpFuncRed = function(){
+        intervalCountScoreUp();
+        setTimeout(intervalCountScoreUp,50);
+        setTimeout(intervalCountScoreUp,100);
+        setTimeout(intervalCountScoreUp,150);
+        setTimeout(intervalCountScoreUp,200);  
+        setTimeout(intervalCountScoreUp,250);
+        setTimeout(intervalCountScoreUp,300);
+        setTimeout(intervalCountScoreUp,350);
+        setTimeout(intervalCountScoreUp,400);
+        setTimeout(intervalCountScoreUp,450);
+        setTimeout(intervalCountScoreUp,500);
+        setTimeout(intervalCountScoreUp,550);
+        setTimeout(intervalCountScoreUp,600);
+        setTimeout(intervalCountScoreUp,650);  
+        setTimeout(intervalCountScoreUp,700);
+        setTimeout(intervalCountScoreUp,750);
+        setTimeout(intervalCountScoreUp,800);
+        setTimeout(intervalCountScoreUp,850);
+        setTimeout(intervalCountScoreUp,900);
+        setTimeout(intervalCountScoreUp,950);
+        setTimeout(intervalCountScoreUp,1000);
+        setTimeout(intervalCountScoreUp,1050);
+        setTimeout(intervalCountScoreUp,1100);
+        setTimeout(intervalCountScoreUp,1150);
+        setTimeout(intervalCountScoreUp,1200);
+}
+
+var diamondUpFuncGold = function(){
+        playerScore++;
+        intervalCountScoreUp();
+        setTimeout(intervalCountScoreUp,50);
+        setTimeout(intervalCountScoreUp,100);
+        setTimeout(intervalCountScoreUp,150);
+        setTimeout(intervalCountScoreUp,200);  
+        setTimeout(intervalCountScoreUp,250);
+        setTimeout(intervalCountScoreUp,300);
+        setTimeout(intervalCountScoreUp,350);
+        setTimeout(intervalCountScoreUp,400);
+        setTimeout(intervalCountScoreUp,450);
+        setTimeout(intervalCountScoreUp,500);
+        setTimeout(intervalCountScoreUp,550);
+        setTimeout(intervalCountScoreUp,600);
+        setTimeout(intervalCountScoreUp,650);  
+        setTimeout(intervalCountScoreUp,700);
+        setTimeout(intervalCountScoreUp,750);
+        setTimeout(intervalCountScoreUp,800);
+        setTimeout(intervalCountScoreUp,850);
+        setTimeout(intervalCountScoreUp,900);
+        setTimeout(intervalCountScoreUp,950);
+        setTimeout(intervalCountScoreUp,1000);
+        setTimeout(intervalCountScoreUp,1050);
+        setTimeout(intervalCountScoreUp,1100);
+        setTimeout(intervalCountScoreUp,1150);
+        setTimeout(intervalCountScoreUp,1200);
+        setTimeout(intervalCountScoreUp,1250);
+        setTimeout(intervalCountScoreUp,1300);
+        setTimeout(intervalCountScoreUp,1350);
+        setTimeout(intervalCountScoreUp,1400);
+        setTimeout(intervalCountScoreUp,1450);  
+        setTimeout(intervalCountScoreUp,1500);
+        setTimeout(intervalCountScoreUp,1550);
+        setTimeout(intervalCountScoreUp,1600);
+        setTimeout(intervalCountScoreUp,1650);
+        setTimeout(intervalCountScoreUp,1700);
+        setTimeout(intervalCountScoreUp,1750);
+        setTimeout(intervalCountScoreUp,1800);
+        setTimeout(intervalCountScoreUp,1850);
+        setTimeout(intervalCountScoreUp,1900);  
+        setTimeout(intervalCountScoreUp,1950);
+        setTimeout(intervalCountScoreUp,2000);
+        setTimeout(intervalCountScoreUp,2050);
+        setTimeout(intervalCountScoreUp,2100);
+        setTimeout(intervalCountScoreUp,2150);
+        setTimeout(intervalCountScoreUp,2200);
+        setTimeout(intervalCountScoreUp,2250);
+        setTimeout(intervalCountScoreUp,2300);
+        setTimeout(intervalCountScoreUp,2350);
+        setTimeout(intervalCountScoreUp,2400);
+      
+}
+        
+var pickUpDiamond1 = function(){
+    if(((playerPositionX >= -35)&&(playerPositionX <= 60))&&(diamondOnField1 == true)){
+        if(diamondColor1 == 'green'){
+            diamondUpFuncGreen();
+            diamondOnField1 = false;
+            $('#diamond1').animate({top:'-=10%'},100);
+            $('#diamond1').fadeOut(100);
+            $('#diamond1').animate({top:'+=10%'},100);
+            
+            
+        }
+        if(diamondColor1 == 'blue'){
+            diamondUpFuncBlue();
+            diamondOnField1 = false;
+            $('#diamond1').animate({top:'-=10%'},100);
+            $('#diamond1').fadeOut(100);
+            $('#diamond1').animate({top:'+=10%'},100);
+        }
+        if(diamondColor1 == 'red'){
+            diamondUpFuncRed();
+            diamondOnField1 = false;
+            $('#diamond1').animate({top:'-=10%'},100);
+            $('#diamond1').fadeOut(100);
+            $('#diamond1').animate({top:'+=10%'},100);
+        }
+        if(diamondColor1 == 'gold'){
+            diamondUpFuncGold();
+            diamondOnField1 = false;
+            $('#diamond1').animate({top:'-=10%'},100);
+            $('#diamond1').fadeOut(100);
+            $('#diamond1').animate({top:'+=10%'},100);
+        }
+    }
+    if(((playerPositionX >= 275)&&(playerPositionX <= 470))&&(diamondOnField2 == true)){
+        if(diamondColor2 == 'green'){
+            diamondUpFuncGreen();
+            diamondOnField2 = false;
+            $('#diamond2').animate({top:'-=10%'},100);
+            $('#diamond2').fadeOut(100);
+            $('#diamond2').animate({top:'+=10%'},100);
+            
+            
+        }
+        if(diamondColor2 == 'blue'){
+            diamondUpFuncBlue();
+            diamondOnField2 = false;
+            $('#diamond2').animate({top:'-=10%'},100);
+            $('#diamond2').fadeOut(100);
+            $('#diamond2').animate({top:'+=10%'},100);
+        }
+        if(diamondColor2 == 'red'){
+            diamondUpFuncRed();
+            diamondOnField2 = false;
+            $('#diamond2').animate({top:'-=10%'},100);
+            $('#diamond2').fadeOut(100);
+            $('#diamond2').animate({top:'+=10%'},100);
+        }
+        if(diamondColor2 == 'gold'){
+            diamondUpFuncGold();
+            diamondOnField2 = false;
+            $('#diamond2').animate({top:'-=10%'},100);
+            $('#diamond2').fadeOut(100);
+            $('#diamond2').animate({top:'+=10%'},100);
+        }
+    }
+    if(((playerPositionX >= 680)&&(playerPositionX <= 870))&&(diamondOnField3 == true)){
+        if(diamondColor3 == 'green'){
+            diamondUpFuncGreen();
+            diamondOnField3 = false;
+            $('#diamond3').animate({top:'-=10%'},100);
+            $('#diamond3').fadeOut(100);
+            $('#diamond3').animate({top:'+=10%'},100);
+            
+            
+        }
+        if(diamondColor3 == 'blue'){
+            diamondUpFuncBlue();
+            diamondOnField3 = false;
+            $('#diamond3').animate({top:'-=10%'},100);
+            $('#diamond3').fadeOut(100);
+            $('#diamond3').animate({top:'+=10%'},100);
+        }
+        if(diamondColor3 == 'red'){
+            diamondUpFuncRed();
+            diamondOnField3 = false;
+            $('#diamond3').animate({top:'-=10%'},100);
+            $('#diamond3').fadeOut(100);
+            $('#diamond3').animate({top:'+=10%'},100);
+        }
+        if(diamondColor3 == 'gold'){
+            diamondUpFuncGold();
+            diamondOnField3 = false;
+            $('#diamond3').animate({top:'-=10%'},100);
+            $('#diamond3').fadeOut(100);
+            $('#diamond3').animate({top:'+=10%'},100);
+        }
+    }
+    if(((playerPositionX >= 1030)&&(playerPositionX <= 1140))&&(diamondOnField4 == true)){
+        if(diamondColor4 == 'green'){
+            diamondUpFuncGreen();
+            diamondOnField4 = false;
+            $('#diamond4').animate({top:'-=10%'},100);
+            $('#diamond4').fadeOut(100);
+            $('#diamond4').animate({top:'+=10%'},100);
+            
+            
+        }
+        if(diamondColor4 == 'blue'){
+            diamondUpFuncBlue();
+            diamondOnField4 = false;
+            $('#diamond4').animate({top:'-=10%'},100);
+            $('#diamond4').fadeOut(100);
+            $('#diamond4').animate({top:'+=10%'},100);
+        }
+        if(diamondColor4 == 'red'){
+            diamondUpFuncRed();
+            diamondOnField4 = false;
+            $('#diamond4').animate({top:'-=10%'},100);
+            $('#diamond4').fadeOut(100);
+            $('#diamond4').animate({top:'+=10%'},100);
+        }
+        if(diamondColor4 == 'gold'){
+            diamondUpFuncGold();
+            diamondOnField4 = false;
+            $('#diamond4').animate({top:'-=10%'},100);
+            $('#diamond4').fadeOut(100);
+            $('#diamond4').animate({top:'+=10%'},100);
+        }
+    }
+     if(((playerPositionX >= 1350)&&(playerPositionX <= 1450))&&(diamondOnField5 == true)){
+        if(diamondColor5 == 'green'){
+            diamondUpFuncGreen();
+            diamondOnField5 = false;
+            $('#diamond5').animate({top:'-=10%'},100);
+            $('#diamond5').fadeOut(100);
+            $('#diamond5').animate({top:'+=10%'},100);
+            
+            
+        }
+        if(diamondColor5 == 'blue'){
+            diamondUpFuncBlue();
+            diamondOnField5 = false;
+            $('#diamond5').animate({top:'-=10%'},100);
+            $('#diamond5').fadeOut(100);
+            $('#diamond5').animate({top:'+=10%'},100);
+        }
+        if(diamondColor5 == 'red'){
+            diamondUpFuncRed();
+            diamondOnField5 = false;
+            $('#diamond5').animate({top:'-=10%'},100);
+            $('#diamond5').fadeOut(100);
+            $('#diamond5').animate({top:'+=10%'},100);
+        }
+        if(diamondColor5 == 'gold'){
+            diamondUpFuncGold();
+            diamondOnField5 = false;
+            $('#diamond5').animate({top:'-=10%'},100);
+            $('#diamond5').fadeOut(100);
+            $('#diamond5').animate({top:'+=10%'},100);
+        }
+    }
+}
+
+        
+
+
+//player loses a Heart
+
+var heartFadeOut1 = function(){
+    $('#heart1').css('opacity','.01');
+}
+
+var heartFadeIn1 = function(){
+    $('#heart1').css('opacity','1');
+}
+
+var heartFadeOut2 = function(){
+    $('#heart2').css('opacity','.01');
+}
+
+var heartFadeIn2 = function(){
+    $('#heart2').css('opacity','1');
+}
+
+var heartFadeOut3 = function(){
+    $('#heart3').css('opacity','.01');
+}
+
+var heartFadeIn3 = function(){
+    $('#heart3').css('opacity','1');
+}
+
+var playerLosesHeart = function(){
+  
+    
+    if(playerHeartValue == 1){
+        playerHeartValue = 0;
+        heartFadeOut2();
+    monster1hp = 0;
+    monster1dies();
+    monster2hp = 0;
+    monster2dies();
+        gameOver();
+        playerCurrentZone = 2;
+        
+        
+        
+    }
+     if(playerHeartValue == 2){
+        playerHeartValue = 1;
+        heartFadeOut2();
+        setTimeout(heartFadeIn2,100);
+        setTimeout(heartFadeOut2,200);
+        setTimeout(heartFadeIn2,300);
+        setTimeout(heartFadeOut2,400);
+        setTimeout(heartFadeIn2,500);
+        setTimeout(heartFadeOut2,600);
+       
+    }
+    if(playerHeartValue == 3){
+        playerHeartValue = 2;
+        heartFadeOut1();
+        setTimeout(heartFadeIn1,100);
+        setTimeout(heartFadeOut1,200);
+        setTimeout(heartFadeIn1,300);
+        setTimeout(heartFadeOut1,400);
+        setTimeout(heartFadeIn1,500);
+        setTimeout(heartFadeOut1,600);
+        
+    }
+    
+}
+
+//player is hit
+
+var playerIsHitFade = function(){
+    $('#player1').css('opacity','.01');
+}
+
+var playerIsHitFadeIn = function(){
+    $('#player1').css('opacity','1');
+}
+
+var playerIsHitAnimation = function(){
+    playerIsHitFade();
+    setTimeout(playerIsHitFadeIn,100);
+    setTimeout(playerIsHitFade,200);
+    setTimeout(playerIsHitFadeIn,300);
+    setTimeout(playerIsHitFade,400);
+    setTimeout(playerIsHitFadeIn,500);
+    setTimeout(playerIsHitFade,600);
+    setTimeout(playerIsHitFadeIn,700);
+}
+
+
+
+//player attack codes
+
+var numAtkFadeOut = function(){
+    $('#atkNum').fadeOut(500);
+}
+
+var player1AtkPower = 5; 
+
+var playerAttacksMon1 = function(){
+    if((((playerPositionX >= -33)&&(playerPositionX <= 120))&&(monster1xposition == 1))&&(monster1hp >= 1)){
+        var attackPowerRandom = Math.floor(Math.random()*player1AtkPower+1);
+        $('#atkNum').fadeIn(100);
+        monster1hp = monster1hp - attackPowerRandom;
+        document.getElementById('monster1HP').innerHTML = 'Monster1 Health: '+monster1hp;
+        document.getElementById('atkNum').innerHTML = attackPowerRandom;
+        monster1dies();
+        swordSwing = new Audio('sfx/slashsfx.wav');
+        swordSwing.play();
+        monster1IsHitComplete();
+        setTimeout(numAtkFadeOut,500);
+        
+    }
+    
+    if((((playerPositionX >= 3)&&(playerPositionX <= 203))&&(monster1xposition == 2))&&(monster1hp >= 1)){
+        var attackPowerRandom = Math.floor(Math.random()*player1AtkPower+1);
+        $('#atkNum').fadeIn(100);
+        monster1hp = monster1hp - attackPowerRandom;
+        document.getElementById('monster1HP').innerHTML = 'Monster1 Health: '+monster1hp;
+        document.getElementById('atkNum').innerHTML = attackPowerRandom;
+        monster1dies();
+        swordSwing = new Audio('sfx/slashsfx.wav');
+        swordSwing.play();
+        monster1IsHitComplete();
+        setTimeout(numAtkFadeOut,500);
+        
+    }
+    if((((playerPositionX >= -80)&&(playerPositionX <= 20))&&(monster1xposition == 3))&&(monster1hp >= 1)){
+        var attackPowerRandom = Math.floor(Math.random()*player1AtkPower+1);
+        $('#atkNum').fadeIn(100);
+        monster1hp = monster1hp - attackPowerRandom;
+        document.getElementById('monster1HP').innerHTML = 'Monster1 Health: '+monster1hp;
+        document.getElementById('atkNum').innerHTML = attackPowerRandom;
+        monster1dies();
+        swordSwing = new Audio('sfx/slashsfx.wav');
+        swordSwing.play();
+        monster1IsHitComplete();
+        setTimeout(numAtkFadeOut,500);
+        
+    }
+    
+}
+
+//monster death
+
+var monster1dies = function(){
+    if(monster1hp <= 0){
+        landWeightMonsterCount--;
+        monster1OnField = false;
+        $('#monster1').fadeOut(500);
+         document.getElementById('monster1HP').innerHTML = 'Monster1 Health: '+monster1hp;
+        monster1xposition = 0;
+        document.getElementById('monster1XPosition').innerHTML = 'Monster1 X position = '+monster1xposition;
+ 
+    }
+}
+
+//monster 1 fade From Appear
+
+var monster1Phasing = function(){
+    $('#monster1').attr('src','models/SlimeWalkAnimationSLIMER1IsHit3.gif');
+}
+
+var monster1BackToNormal = function(){
+    $('#monster1').attr('src','models/SlimeWalkAnimationSLIMER1.gif');
+}
+
+var monster1IsHitComplete = function(){
+    monster1Phasing();
+    setTimeout(monster1BackToNormal,600);
+}
+
+//monster 1 appearing
+
+var mon1Appearing = function(){
+    var willMon1Appear = Math.floor(Math.random()*20+1);
+    if((willMon1Appear >= 10)&&(gameOverBool == false)){
+        
+        landWeightMonsterCount++;
+        document.getElementById('monsterCount').innerHTML = 'Monster Count: '+landWeightMonsterCount;
+        document.getElementById('weightNum').innerHTML = landWeight+'%';
+        monster1OnField = true;
+        $('#monster1').css('top','0');
+        $('#monster1').css('left','35%');
+        setTimeout(monster1RandomMovement,1000);
+        monster1hp = 5;
+        document.getElementById('monster1HP').innerHTML = 'Monster1 Health: '+monster1hp;
+        $('#monster1').fadeIn(300);
+        $('#monster1').animate({top:'31.5%'},1000);
+        
+    }
+}
+
+//interval will only play if monsterOnField is false
+
+var mon1Interval = function(){
+    if(monster1OnField == false){
+        mon1Appearing();
+    }
+}
+
+//monster code lets walk, lets talk
+
+var monster1OnField = false;
+var monster1xposition = 0;   
+var monster1hp = 5;        
+
+var monster1RandomMovement = function(){
+    if(monster1OnField == true){
+    var monsterRandomNum = Math.floor(Math.random()*3+1);
+    if(monsterRandomNum == 1){
+        monster1AttackPlayer();
+        $('#monster1').animate({left:'35%'},1000);
+        monster1xposition = 1;
+        document.getElementById('monster1XPosition').innerHTML = 'Monster1 X position = '+monster1xposition;
+        
+        
+    }
+    if(monsterRandomNum == 2){
+        monster1AttackPlayer();
+        $('#monster1').animate({left:'36.68%'},1000);
+        monster1xposition = 2;
+        document.getElementById('monster1XPosition').innerHTML = 'Monster1 X position = '+monster1xposition;
+        
+        
+    }
+    if(monsterRandomNum == 3){
+        monster1AttackPlayer();
+        $('#monster1').animate({left:'33.32%'},1000);
+        monster1xposition = 3;
+        document.getElementById('monster1XPosition').innerHTML = 'Monster1 X position = '+monster1xposition;
+       
+        
+    }
+}
+}
+   
+//monster attacking player
+
+var monster1AttackAnimation = function(){
+    if((gameOverBool == false)&&(monster1OnField == true)){
+    $('#monster1').animate({top:'20.5%'},250);
+    $('#monster1').animate({top:'31.5%'},250);
+    slimeAttack = new Audio('sfx/slimeAttack.wav');
+    slimeAttack.play();
+    }
+}
+
+var monster1AttackPlayer = function(){
+    if((gameOverBool == false)&&(monster1OnField == true)){
+    var willMonster1Attack = Math.floor(Math.random()*3+1);
+    if((((playerPositionX >= -33)&&(playerPositionX <= 120))&&(monster1xposition == 1))&&(willMonster1Attack >= 2)){  
+        monster1AttackAnimation();
+        setTimeout(playerIsHitAnimation,500);
+        setTimeout(playerLosesHeart,500);
+    }
+    
+    if((((playerPositionX >= 3)&&(playerPositionX <= 203))&&(monster1xposition == 2))&&(willMonster1Attack >= 2)){
+        monster1AttackAnimation();
+        setTimeout(playerIsHitAnimation,500);
+        setTimeout(playerLosesHeart,500);
+    }
+    if((((playerPositionX >= -80)&&(playerPositionX <= 20))&&(monster1xposition == 3))&&(willMonster1Attack >= 2)){
+        monster1AttackAnimation();
+        setTimeout(playerIsHitAnimation,500);
+        setTimeout(playerLosesHeart,500);
+    }
+    
+}
+}
+
+//PLAYER VS MON 2// PLAYER VS MON 2 //
+
+var playerAttacksMon2 = function(){
+    if((((playerPositionX >= -33)&&(playerPositionX <= 120))&&(monster2xposition == 1))&&(monster2hp >= 1)){
+        var attackPowerRandom = Math.floor(Math.random()*player1AtkPower+1);
+        $('#atkNum').fadeIn(100);
+        monster2hp = monster2hp - attackPowerRandom;
+        document.getElementById('monster2HP').innerHTML = 'Monster2 Health: '+monster2hp;
+        document.getElementById('atkNum').innerHTML = attackPowerRandom;
+        monster2dies();
+        swordSwing = new Audio('sfx/slashsfx.wav');
+        swordSwing.play();
+        monster2IsHitComplete();
+        setTimeout(numAtkFadeOut,500);
+        
+    }
+    
+    if((((playerPositionX >= 3)&&(playerPositionX <= 203))&&(monster2xposition == 2))&&(monster2hp >= 1)){
+        var attackPowerRandom = Math.floor(Math.random()*player1AtkPower+1);
+        $('#atkNum').fadeIn(100);
+        monster2hp = monster2hp - attackPowerRandom;
+        document.getElementById('monster2HP').innerHTML = 'Monster2 Health: '+monster2hp;
+        document.getElementById('atkNum').innerHTML = attackPowerRandom;
+        monster2dies();
+        swordSwing = new Audio('sfx/slashsfx.wav');
+        swordSwing.play();
+        monster2IsHitComplete();
+        setTimeout(numAtkFadeOut,500);
+        
+    }
+    if((((playerPositionX >= -80)&&(playerPositionX <= 20))&&(monster2xposition == 3))&&(monster2hp >= 1)){
+        var attackPowerRandom = Math.floor(Math.random()*player1AtkPower+1);
+        $('#atkNum').fadeIn(100);
+        monster2hp = monster2hp - attackPowerRandom;
+        document.getElementById('monster2HP').innerHTML = 'Monster2 Health: '+monster2hp;
+        document.getElementById('atkNum').innerHTML = attackPowerRandom;
+        monster2dies();
+        swordSwing = new Audio('sfx/slashsfx.wav');
+        swordSwing.play();
+        monster2IsHitComplete();
+        setTimeout(numAtkFadeOut,500);
+        
+    }
+    
+}
+
+//monster death
+
+var monster2dies = function(){
+    if(monster2hp <= 0){
+        landWeightMonsterCount--;
+        monster2OnField = false;
+        $('#monster2').fadeOut(500);
+        document.getElementById('monster2HP').innerHTML = 'Monster2 Health: '+monster2hp;
+        monster2xposition = 0;
+        document.getElementById('monster2XPosition').innerHTML = 'Monster2 X position = '+monster2xposition;
+     
+    }
+}
+
+//monster 1 fade From Appear
+
+var monster2Phasing = function(){
+    $('#monster2').attr('src','models/SlimeisHITAnimationSLIMER1PINK.gif');
+}
+
+var monster2BackToNormal = function(){
+    $('#monster2').attr('src','models/SlimeWalkAnimationSLIMER1PINK.gif');
+}
+
+var monster2IsHitComplete = function(){
+    monster2Phasing();
+    setTimeout(monster2BackToNormal,600);
+}
+
+//monster 1 appearing
+
+var mon2Appearing = function(){
+    var willMon2Appear = Math.floor(Math.random()*20+1);
+    if((willMon2Appear >= 15)&&(gameOverBool == false)){
+        
+        landWeightMonsterCount++;
+        document.getElementById('monsterCount').innerHTML = 'Monster Count: '+landWeightMonsterCount;
+        document.getElementById('weightNum').innerHTML = landWeight+'%';
+        monster2OnField = true;
+        $('#monster2').css('top','0');
+        $('#monster2').css('left','35%');
+        setTimeout(monster2RandomMovement,1000);
+        monster2hp = 10;
+        document.getElementById('monster2HP').innerHTML = 'Monster2 Health: '+monster2hp;
+        $('#monster2').fadeIn(300);
+        $('#monster2').animate({top:'31.5%'},1000);
+        
+    }
+}
+
+//interval will only play if monsterOnField is false
+
+var mon2Interval = function(){
+    if(monster2OnField == false){
+        mon2Appearing();
+    }
+}
+
+//monster code lets walk, lets talk
+
+var monster2OnField = false;
+var monster2xposition = 0;   
+var monster2hp = 10;        
+
+var monster2RandomMovement = function(){
+    if(monster2OnField == true){
+    var monsterRandomNum = Math.floor(Math.random()*3+1);
+    if(monsterRandomNum == 1){
+        monster2AttackPlayer();
+        $('#monster2').animate({left:'35%'},1000);
+        monster2xposition = 1;
+        document.getElementById('monster2XPosition').innerHTML = 'Monster2 X position = '+monster2xposition;
+        
+        
+    }
+    if(monsterRandomNum == 2){
+        monster2AttackPlayer();
+        $('#monster2').animate({left:'36.68%'},1000);
+        monster2xposition = 2;
+        document.getElementById('monster2XPosition').innerHTML = 'Monster2 X position = '+monster2xposition;
+        
+        
+    }
+    if(monsterRandomNum == 3){
+        monster2AttackPlayer();
+        $('#monster2').animate({left:'33.32%'},1000);
+        monster2xposition = 3;
+        document.getElementById('monster2XPosition').innerHTML = 'Monster2 X position = '+monster2xposition;
+       
+        
+    }
+}
+}
+   
+//monster attacking player
+
+var monster2AttackAnimation = function(){
+    if((gameOverBool == false)&&(monster2OnField == true)){
+    $('#monster2').animate({top:'20.5%'},250);
+    $('#monster2').animate({top:'31.5%'},250);
+    slimeAttack = new Audio('sfx/slimeAttack.wav');
+    slimeAttack.play();
+    }
+}
+
+var monster2AttackPlayer = function(){
+    if((gameOverBool == false)&&(monster2OnField == true)){
+    var willMonster2Attack = Math.floor(Math.random()*3+1);
+    if((((playerPositionX >= -33)&&(playerPositionX <= 120))&&(monster2xposition == 1))&&(willMonster2Attack >= 2)){  
+        monster2AttackAnimation();
+        setTimeout(playerIsHitAnimation,500);
+        setTimeout(playerLosesHeart,500);
+    }
+    
+    if((((playerPositionX >= 3)&&(playerPositionX <= 203))&&(monster2xposition == 2))&&(willMonster2Attack >= 2)){
+        monster2AttackAnimation();
+        setTimeout(playerIsHitAnimation,500);
+        setTimeout(playerLosesHeart,500);
+    }
+    if((((playerPositionX >= -80)&&(playerPositionX <= 20))&&(monster2xposition == 3))&&(willMonster2Attack >= 2)){
+        monster2AttackAnimation();
+        setTimeout(playerIsHitAnimation,500);
+        setTimeout(playerLosesHeart,500);
+    }
+    
+}
+}
+
+
+//PLAYER VS MON 2 // PLAYER VS MON 2//
+
+
+//PLAYER VS MON 3// PLAYER VS MON 3 //
+
+var playerAttacksMon3 = function(){
+    if((((playerPositionX >= -33)&&(playerPositionX <= 120))&&(monster3xposition == 1))&&(monster3hp >= 1)){
+        var attackPowerRandom = Math.floor(Math.random()*player1AtkPower+1);
+        $('#atkNum').fadeIn(100);
+        monster3hp = monster3hp - attackPowerRandom;
+        document.getElementById('monster3HP').innerHTML = 'Monster3 Health: '+monster3hp;
+        document.getElementById('atkNum').innerHTML = attackPowerRandom;
+        monster3dies();
+        swordSwing = new Audio('sfx/slashsfx.wav');
+        swordSwing.play();
+        monster3IsHitComplete();
+        setTimeout(numAtkFadeOut,500);
+        
+    }
+    
+    if((((playerPositionX >= 3)&&(playerPositionX <= 203))&&(monster3xposition == 2))&&(monster3hp >= 1)){
+        var attackPowerRandom = Math.floor(Math.random()*player1AtkPower+1);
+        $('#atkNum').fadeIn(100);
+        monster3hp = monster3hp - attackPowerRandom;
+        document.getElementById('monster3HP').innerHTML = 'Monster3 Health: '+monster3hp;
+        document.getElementById('atkNum').innerHTML = attackPowerRandom;
+        monster3dies();
+        swordSwing = new Audio('sfx/slashsfx.wav');
+        swordSwing.play();
+        monster3IsHitComplete();
+        setTimeout(numAtkFadeOut,500);
+        
+    }
+    if((((playerPositionX >= -80)&&(playerPositionX <= 20))&&(monster3xposition == 3))&&(monster3hp >= 1)){
+        var attackPowerRandom = Math.floor(Math.random()*player1AtkPower+1);
+        $('#atkNum').fadeIn(100);
+        monster3hp = monster3hp - attackPowerRandom;
+        document.getElementById('monster3HP').innerHTML = 'Monster3 Health: '+monster3hp;
+        document.getElementById('atkNum').innerHTML = attackPowerRandom;
+        monster3dies();
+        swordSwing = new Audio('sfx/slashsfx.wav');
+        swordSwing.play();
+        monster3IsHitComplete();
+        setTimeout(numAtkFadeOut,500);
+        
+    }
+    
+}
+
+//monster death
+
+var monster3dies = function(){
+    if(monster3hp <= 0){
+        landWeightMonsterCount--;
+        monster3OnField = false;
+        $('#monster3').fadeOut(500);
+        document.getElementById('monster3HP').innerHTML = 'Monster3 Health: '+monster3hp;
+        monster3xposition = 0;
+        document.getElementById('monster3XPosition').innerHTML = 'Monster3 X position = '+monster3xposition;
+     
+    }
+}
+
+//monster 1 fade From Appear
+
+var monster3Phasing = function(){
+    $('#monster3').attr('src','models/SlimeisHITAnimationSLIMER1GOLDnew.gif');
+}
+
+var monster3BackToNormal = function(){
+    $('#monster3').attr('src','models/SlimeWalkAnimationSLIMERGOLD1new.gif');
+}
+
+var monster3IsHitComplete = function(){
+    monster3Phasing();
+    setTimeout(monster3BackToNormal,600);
+}
+
+//monster 1 appearing
+
+var mon3Appearing = function(){
+    var willMon3Appear = Math.floor(Math.random()*20+1);
+    if((willMon3Appear >= 18)&&(gameOverBool == false)){
+        
+        landWeightMonsterCount++;
+        document.getElementById('monsterCount').innerHTML = 'Monster Count: '+landWeightMonsterCount;
+        document.getElementById('weightNum').innerHTML = landWeight+'%';
+        monster3OnField = true;
+        $('#monster3').css('top','0');
+        $('#monster3').css('left','35%');
+        setTimeout(monster3RandomMovement,1000);
+        monster3hp = 15;
+        document.getElementById('monster3HP').innerHTML = 'Monster3 Health: '+monster3hp;
+        $('#monster3').fadeIn(300);
+        $('#monster3').animate({top:'31.5%'},1000);
+        
+    }
+}
+
+//interval will only play if monsterOnField is false
+
+var mon3Interval = function(){
+    if(monster3OnField == false){
+        mon3Appearing();
+    }
+}
+
+//monster code lets walk, lets talk
+
+var monster3OnField = false;
+var monster3xposition = 0;   
+var monster3hp = 15;        
+
+var monster3RandomMovement = function(){
+    if(monster3OnField == true){
+    var monsterRandomNum = Math.floor(Math.random()*3+1);
+    if(monsterRandomNum == 1){
+        monster3AttackPlayer();
+        $('#monster3').animate({left:'35%'},1000);
+        monster3xposition = 1;
+        document.getElementById('monster3XPosition').innerHTML = 'Monster3 X position = '+monster3xposition;
+        
+        
+    }
+    if(monsterRandomNum == 2){
+        monster3AttackPlayer();
+        $('#monster3').animate({left:'36.68%'},1000);
+        monster3xposition = 2;
+        document.getElementById('monster3XPosition').innerHTML = 'Monster3 X position = '+monster3xposition;
+        
+        
+    }
+    if(monsterRandomNum == 3){
+        monster3AttackPlayer();
+        $('#monster3').animate({left:'33.32%'},1000);
+        monster3xposition = 3;
+        document.getElementById('monster3XPosition').innerHTML = 'Monster3 X position = '+monster3xposition;
+       
+        
+    }
+}
+}
+   
+//monster attacking player
+
+var monster3AttackAnimation = function(){
+    if((gameOverBool == false)&&(monster3OnField == true)){
+    $('#monster3').animate({top:'20.5%'},250);
+    $('#monster3').animate({top:'31.5%'},250);
+    slimeAttack = new Audio('sfx/slimeAttack.wav');
+    slimeAttack.play();
+    }
+}
+
+var monster3AttackPlayer = function(){
+    if((gameOverBool == false)&&(monster3OnField == true)){
+    var willMonster3Attack = Math.floor(Math.random()*3+1);
+    if((((playerPositionX >= -33)&&(playerPositionX <= 120))&&(monster3xposition == 1))&&(willMonster3Attack >= 2)){  
+        monster3AttackAnimation();
+        setTimeout(playerIsHitAnimation,500);
+        setTimeout(playerLosesHeart,500);
+    }
+    
+    if((((playerPositionX >= 3)&&(playerPositionX <= 203))&&(monster3xposition == 2))&&(willMonster3Attack >= 2)){
+        monster3AttackAnimation();
+        setTimeout(playerIsHitAnimation,500);
+        setTimeout(playerLosesHeart,500);
+    }
+    if((((playerPositionX >= -80)&&(playerPositionX <= 20))&&(monster3xposition == 3))&&(willMonster3Attack >= 2)){
+        monster3AttackAnimation();
+        setTimeout(playerIsHitAnimation,500);
+        setTimeout(playerLosesHeart,500);
+    }
+    
+}
+}
+
+
+//PLAYER VS MON 3 // PLAYER VS MON 3//
+
+//PLAYER VS MON 4// PLAYER VS MON 4 //
+
+var playerAttacksMon4 = function(){
+    if((((playerPositionX >= 1210)&&(playerPositionX <= 1420))&&(monster4xposition == 1))&&(monster4hp >= 1)){
+        var attackPowerRandom = Math.floor(Math.random()*player1AtkPower+1);
+        $('#atkNum').fadeIn(100);
+        monster4hp = monster4hp - attackPowerRandom;
+        document.getElementById('monster4HP').innerHTML = 'Monster4 Health: '+monster4hp;
+        document.getElementById('atkNum').innerHTML = attackPowerRandom;
+        monster4dies();
+        swordSwing = new Audio('sfx/slashsfx.wav');
+        swordSwing.play();
+        monster4IsHitComplete();
+        setTimeout(numAtkFadeOut,500);
+        
+    }
+    
+    if((((playerPositionX >= 1320)&&(playerPositionX <= 1500))&&(monster4xposition == 2))&&(monster4hp >= 1)){
+        var attackPowerRandom = Math.floor(Math.random()*player1AtkPower+1);
+        $('#atkNum').fadeIn(100);
+        monster4hp = monster4hp - attackPowerRandom;
+        document.getElementById('monster4HP').innerHTML = 'Monster4 Health: '+monster4hp;
+        document.getElementById('atkNum').innerHTML = attackPowerRandom;
+        monster4dies();
+        swordSwing = new Audio('sfx/slashsfx.wav');
+        swordSwing.play();
+        monster4IsHitComplete();
+        setTimeout(numAtkFadeOut,500);
+        
+    }
+    if((((playerPositionX >= 1110)&&(playerPositionX <= 1310))&&(monster4xposition == 3))&&(monster4hp >= 1)){
+        var attackPowerRandom = Math.floor(Math.random()*player1AtkPower+1);
+        $('#atkNum').fadeIn(100);
+        monster4hp = monster4hp - attackPowerRandom;
+        document.getElementById('monster4HP').innerHTML = 'Monster4 Health: '+monster4hp;
+        document.getElementById('atkNum').innerHTML = attackPowerRandom;
+        monster4dies();
+        swordSwing = new Audio('sfx/slashsfx.wav');
+        swordSwing.play();
+        monster4IsHitComplete();
+        setTimeout(numAtkFadeOut,500);
+        
+    }
+    
+}
+
+//monster death
+
+var monster4dies = function(){
+    if(monster4hp <= 0){
+        landWeightMonsterCount--;
+        monster4OnField = false;
+        $('#monster4').fadeOut(500);
+        document.getElementById('monster4HP').innerHTML = 'Monster4 Health: '+monster4hp;
+        monster4xposition = 0;
+        document.getElementById('monster4XPosition').innerHTML = 'Monster4 X position = '+monster4xposition;
+     
+    }
+}
+
+//monster 1 fade From Appear
+
+var monster4Phasing = function(){
+    $('#monster4').attr('src','models/SlimeWalkAnimationSLIMER1IsHit3.gif');
+}
+
+var monster4BackToNormal = function(){
+    $('#monster4').attr('src','models/SlimeWalkAnimationSLIMER1.gif');
+}
+
+var monster4IsHitComplete = function(){
+    monster4Phasing();
+    setTimeout(monster4BackToNormal,600);
+}
+
+//monster 1 appearing
+
+var mon4Appearing = function(){
+    var willMon4Appear = Math.floor(Math.random()*20+1);
+    if((willMon4Appear >= 10)&&(gameOverBool == false)){
+        
+        landWeightMonsterCount++;
+        document.getElementById('monsterCount').innerHTML = 'Monster Count: '+landWeightMonsterCount;
+        document.getElementById('weightNum').innerHTML = landWeight+'%';
+        monster4OnField = true;
+        $('#monster4').css('top','0');
+        $('#monster4').css('left','57%');
+        setTimeout(monster4RandomMovement,1000);
+        monster4hp = 5;
+        document.getElementById('monster4HP').innerHTML = 'Monster4 Health: '+monster4hp;
+        $('#monster4').fadeIn(300);
+        $('#monster4').animate({top:'32.5%'},1000);
+        
+    }
+}
+
+//interval will only play if monsterOnField is false
+
+var mon4Interval = function(){
+    if(monster4OnField == false){
+        mon4Appearing();
+    }
+}
+
+//monster code lets walk, lets talk
+
+var monster4OnField = false;
+var monster4xposition = 0;   
+var monster4hp = 5;        
+
+var monster4RandomMovement = function(){
+    if(monster4OnField == true){
+    var monsterRandomNum = Math.floor(Math.random()*3+1);
+    if(monsterRandomNum == 1){
+        monster4AttackPlayer();
+    
+        $('#monster4').animate({left: '57%', top: '32.5%'}, 1000);
+        monster4xposition = 1;
+        document.getElementById('monster4XPosition').innerHTML = 'Monster4 X position = '+monster4xposition;
+        
+        
+    }
+    if(monsterRandomNum == 2){
+        monster4AttackPlayer();
+        
+        $('#monster4').animate({left: '58.68%', top: '32.5%'}, 1000);
+        monster4xposition = 2;
+        document.getElementById('monster4XPosition').innerHTML = 'Monster4 X position = '+monster4xposition;
+        
+        
+    }
+    if(monsterRandomNum == 3){
+        monster4AttackPlayer();
+       
+        $('#monster4').animate({left: '55.32%', top: '33.5%'}, 1000);
+        monster4xposition = 3;
+        document.getElementById('monster4XPosition').innerHTML = 'Monster4 X position = '+monster4xposition;
+       
+        
+    }
+}
+}
+   
+//monster attacking player
+
+var monster4AttackAnimation = function(){
+    if((gameOverBool == false)&&(monster4OnField == true)){
+    $('#monster4').animate({top:'20.5%'},250);
+    $('#monster4').animate({top:'31.5%'},250);
+    slimeAttack = new Audio('sfx/slimeAttack.wav');
+    slimeAttack.play();
+    }
+}
+
+var monster4AttackPlayer = function(){
+    if((gameOverBool == false)&&(monster4OnField == true)){
+    var willMonster4Attack = Math.floor(Math.random()*3+1);
+    if((((playerPositionX >= 1210)&&(playerPositionX <= 1420))&&(monster4xposition == 1))&&(willMonster4Attack >= 2)){  
+        monster4AttackAnimation();
+        setTimeout(playerIsHitAnimation,500);
+        setTimeout(playerLosesHeart,500);
+    }
+    
+    if((((playerPositionX >= 1320)&&(playerPositionX <= 1500))&&(monster4xposition == 2))&&(willMonster4Attack >= 2)){
+        monster4AttackAnimation();
+        setTimeout(playerIsHitAnimation,500);
+        setTimeout(playerLosesHeart,500);
+    }
+    if((((playerPositionX >= 1110)&&(playerPositionX <= 1310))&&(monster4xposition == 3))&&(willMonster4Attack >= 2)){
+        monster4AttackAnimation();
+        setTimeout(playerIsHitAnimation,500);
+        setTimeout(playerLosesHeart,500);
+    }
+    
+}
+}
+
+
+//PLAYER VS MON 4 // PLAYER VS MON 4//
+
+//PLAYER VS MON 5// PLAYER VS MON 5 //
+
+var playerAttacksMon5 = function(){
+    if((((playerPositionX >= 1210)&&(playerPositionX <= 1420))&&(monster5xposition == 1))&&(monster5hp >= 1)){
+        var attackPowerRandom = Math.floor(Math.random()*player1AtkPower+1);
+        $('#atkNum').fadeIn(100);
+        monster5hp = monster5hp - attackPowerRandom;
+        document.getElementById('monster5HP').innerHTML = 'Monster5 Health: '+monster5hp;
+        document.getElementById('atkNum').innerHTML = attackPowerRandom;
+        monster5dies();
+        swordSwing = new Audio('sfx/slashsfx.wav');
+        swordSwing.play();
+        monster5IsHitComplete();
+        setTimeout(numAtkFadeOut,500);
+        
+    }
+    
+    if((((playerPositionX >= 1320)&&(playerPositionX <= 1500))&&(monster5xposition == 2))&&(monster5hp >= 1)){
+        var attackPowerRandom = Math.floor(Math.random()*player1AtkPower+1);
+        $('#atkNum').fadeIn(100);
+        monster5hp = monster5hp - attackPowerRandom;
+        document.getElementById('monster5HP').innerHTML = 'Monster5 Health: '+monster5hp;
+        document.getElementById('atkNum').innerHTML = attackPowerRandom;
+        monster5dies();
+        swordSwing = new Audio('sfx/slashsfx.wav');
+        swordSwing.play();
+        monster5IsHitComplete();
+        setTimeout(numAtkFadeOut,500);
+        
+    }
+    if((((playerPositionX >= 1110)&&(playerPositionX <= 1310))&&(monster5xposition == 3))&&(monster5hp >= 1)){
+        var attackPowerRandom = Math.floor(Math.random()*player1AtkPower+1);
+        $('#atkNum').fadeIn(100);
+        monster5hp = monster5hp - attackPowerRandom;
+        document.getElementById('monster5HP').innerHTML = 'Monster5 Health: '+monster5hp;
+        document.getElementById('atkNum').innerHTML = attackPowerRandom;
+        monster5dies();
+        swordSwing = new Audio('sfx/slashsfx.wav');
+        swordSwing.play();
+        monster5IsHitComplete();
+        setTimeout(numAtkFadeOut,500);
+        
+    }
+    
+}
+
+//monster death
+
+var monster5dies = function(){
+    if(monster5hp <= 0){
+        landWeightMonsterCount--;
+        monster5OnField = false;
+        $('#monster5').fadeOut(500);
+        document.getElementById('monster5HP').innerHTML = 'Monster5 Health: '+monster5hp;
+        monster5xposition = 0;
+        document.getElementById('monster5XPosition').innerHTML = 'Monster5 X position = '+monster5xposition;
+     
+    }
+}
+
+//monster 1 fade From Appear
+
+var monster5Phasing = function(){
+    $('#monster5').attr('src','models/SlimeisHITAnimationSLIMER1PINK.gif');
+}
+
+var monster5BackToNormal = function(){
+    $('#monster5').attr('src','models/SlimeWalkAnimationSLIMER1PINK.gif');
+}
+
+var monster5IsHitComplete = function(){
+    monster5Phasing();
+    setTimeout(monster5BackToNormal,600);
+}
+
+//monster 1 appearing
+
+var mon5Appearing = function(){
+    var willMon5Appear = Math.floor(Math.random()*20+1);
+    if((willMon5Appear >= 15)&&(gameOverBool == false)){
+        
+        landWeightMonsterCount++;
+        document.getElementById('monsterCount').innerHTML = 'Monster Count: '+landWeightMonsterCount;
+        document.getElementById('weightNum').innerHTML = landWeight+'%';
+        monster5OnField = true;
+        $('#monster5').css('top','0');
+        $('#monster5').css('left','57%');
+        setTimeout(monster5RandomMovement,1000);
+        monster5hp = 10;
+        document.getElementById('monster5HP').innerHTML = 'Monster5 Health: '+monster5hp;
+        $('#monster5').fadeIn(300);
+        $('#monster5').animate({top:'32.5%'},1000);
+        
+    }
+}
+
+//interval will only play if monsterOnField is false
+
+var mon5Interval = function(){
+    if(monster5OnField == false){
+        mon5Appearing();
+    }
+}
+
+//monster code lets walk, lets talk
+
+var monster5OnField = false;
+var monster5xposition = 0;   
+var monster5hp = 10;        
+
+var monster5RandomMovement = function(){
+    if(monster5OnField == true){
+    var monsterRandomNum = Math.floor(Math.random()*3+1);
+    if(monsterRandomNum == 1){
+        monster5AttackPlayer();
+    
+        $('#monster5').animate({left: '57%', top: '32.5%'}, 1000);
+        monster5xposition = 1;
+        document.getElementById('monster5XPosition').innerHTML = 'Monster5 X position = '+monster5xposition;
+        
+        
+    }
+    if(monsterRandomNum == 2){
+        monster5AttackPlayer();
+        
+        $('#monster5').animate({left: '58.68%', top: '32.5%'}, 1000);
+        monster5xposition = 2;
+        document.getElementById('monster5XPosition').innerHTML = 'Monster5 X position = '+monster5xposition;
+        
+        
+    }
+    if(monsterRandomNum == 3){
+        monster5AttackPlayer();
+       
+        $('#monster5').animate({left: '55.32%', top: '33.5%'}, 1000);
+        monster5xposition = 3;
+        document.getElementById('monster5XPosition').innerHTML = 'Monster5 X position = '+monster5xposition;
+       
+        
+    }
+}
+}
+   
+//monster attacking player
+
+var monster5AttackAnimation = function(){
+    if((gameOverBool == false)&&(monster5OnField == true)){
+    $('#monster5').animate({top:'20.5%'},250);
+    $('#monster5').animate({top:'31.5%'},250);
+    slimeAttack = new Audio('sfx/slimeAttack.wav');
+    slimeAttack.play();
+    }
+}
+
+var monster5AttackPlayer = function(){
+    if((gameOverBool == false)&&(monster5OnField == true)){
+    var willMonster5Attack = Math.floor(Math.random()*3+1);
+    if((((playerPositionX >= 1210)&&(playerPositionX <= 1420))&&(monster5xposition == 1))&&(willMonster5Attack >= 2)){  
+        monster5AttackAnimation();
+        setTimeout(playerIsHitAnimation,500);
+        setTimeout(playerLosesHeart,500);
+    }
+    
+    if((((playerPositionX >= 1320)&&(playerPositionX <= 1500))&&(monster5xposition == 2))&&(willMonster5Attack >= 2)){
+        monster5AttackAnimation();
+        setTimeout(playerIsHitAnimation,500);
+        setTimeout(playerLosesHeart,500);
+    }
+    if((((playerPositionX >= 1110)&&(playerPositionX <= 1310))&&(monster5xposition == 3))&&(willMonster5Attack >= 2)){
+        monster5AttackAnimation();
+        setTimeout(playerIsHitAnimation,500);
+        setTimeout(playerLosesHeart,500);
+    }
+    
+}
+}
+
+
+//PLAYER VS MON 5 // PLAYER VS MON 5//
+
+//PLAYER VS MON 6// PLAYER VS MON 6 //
+
+var playerAttacksMon6 = function(){
+    if((((playerPositionX >= 1210)&&(playerPositionX <= 1420))&&(monster6xposition == 1))&&(monster6hp >= 1)){
+        var attackPowerRandom = Math.floor(Math.random()*player1AtkPower+1);
+        $('#atkNum').fadeIn(100);
+        monster6hp = monster6hp - attackPowerRandom;
+        document.getElementById('monster6HP').innerHTML = 'Monster6 Health: '+monster6hp;
+        document.getElementById('atkNum').innerHTML = attackPowerRandom;
+        monster6dies();
+        swordSwing = new Audio('sfx/slashsfx.wav');
+        swordSwing.play();
+        monster6IsHitComplete();
+        setTimeout(numAtkFadeOut,500);
+        
+    }
+    
+    if((((playerPositionX >= 1320)&&(playerPositionX <= 1500))&&(monster6xposition == 2))&&(monster6hp >= 1)){
+        var attackPowerRandom = Math.floor(Math.random()*player1AtkPower+1);
+        $('#atkNum').fadeIn(100);
+        monster6hp = monster6hp - attackPowerRandom;
+        document.getElementById('monster6HP').innerHTML = 'Monster6 Health: '+monster6hp;
+        document.getElementById('atkNum').innerHTML = attackPowerRandom;
+        monster6dies();
+        swordSwing = new Audio('sfx/slashsfx.wav');
+        swordSwing.play();
+        monster6IsHitComplete();
+        setTimeout(numAtkFadeOut,500);
+        
+    }
+    if((((playerPositionX >= 1110)&&(playerPositionX <= 1310))&&(monster6xposition == 3))&&(monster6hp >= 1)){
+        var attackPowerRandom = Math.floor(Math.random()*player1AtkPower+1);
+        $('#atkNum').fadeIn(100);
+        monster6hp = monster6hp - attackPowerRandom;
+        document.getElementById('monster6HP').innerHTML = 'Monster6 Health: '+monster6hp;
+        document.getElementById('atkNum').innerHTML = attackPowerRandom;
+        monster6dies();
+        swordSwing = new Audio('sfx/slashsfx.wav');
+        swordSwing.play();
+        monster6IsHitComplete();
+        setTimeout(numAtkFadeOut,500);
+        
+    }
+    
+}
+
+//monster death
+
+var monster6dies = function(){
+    if(monster6hp <= 0){
+        landWeightMonsterCount--;
+        monster6OnField = false;
+        $('#monster6').fadeOut(500);
+        document.getElementById('monster6HP').innerHTML = 'Monster6 Health: '+monster6hp;
+        monster6xposition = 0;
+        document.getElementById('monster6XPosition').innerHTML = 'Monster6 X position = '+monster6xposition;
+     
+    }
+}
+
+//monster 1 fade From Appear
+
+var monster6Phasing = function(){
+    $('#monster6').attr('src','models/SlimeisHITAnimationSLIMER1GOLDnew.gif');
+}
+
+var monster6BackToNormal = function(){
+    $('#monster6').attr('src','models/SlimeWalkAnimationSLIMERGOLD1new.gif');
+}
+
+var monster6IsHitComplete = function(){
+    monster6Phasing();
+    setTimeout(monster6BackToNormal,600);
+}
+
+//monster 1 appearing
+
+var mon6Appearing = function(){
+    var willMon6Appear = Math.floor(Math.random()*20+1);
+    if((willMon6Appear >= 18)&&(gameOverBool == false)){
+        
+        landWeightMonsterCount++;
+        document.getElementById('monsterCount').innerHTML = 'Monster Count: '+landWeightMonsterCount;
+        document.getElementById('weightNum').innerHTML = landWeight+'%';
+        monster6OnField = true;
+        $('#monster6').css('top','0');
+        $('#monster6').css('left','57%');
+        setTimeout(monster6RandomMovement,1000);
+        monster6hp = 15;
+        document.getElementById('monster6HP').innerHTML = 'Monster6 Health: '+monster6hp;
+        $('#monster6').fadeIn(300);
+        $('#monster6').animate({top:'32.5%'},1000);
+        
+    }
+}
+
+//interval will only play if monsterOnField is false
+
+var mon6Interval = function(){
+    if(monster6OnField == false){
+        mon6Appearing();
+    }
+}
+
+//monster code lets walk, lets talk
+
+var monster6OnField = false;
+var monster6xposition = 0;   
+var monster6hp = 15;        
+
+var monster6RandomMovement = function(){
+    if(monster6OnField == true){
+    var monsterRandomNum = Math.floor(Math.random()*3+1);
+    if(monsterRandomNum == 1){
+        monster6AttackPlayer();
+    
+        $('#monster6').animate({left: '57%', top: '32.5%'}, 1000);
+        monster6xposition = 1;
+        document.getElementById('monster6XPosition').innerHTML = 'Monster6 X position = '+monster6xposition;
+        
+        
+    }
+    if(monsterRandomNum == 2){
+        monster6AttackPlayer();
+        
+        $('#monster6').animate({left: '58.68%', top: '32.5%'}, 1000);
+        monster6xposition = 2;
+        document.getElementById('monster6XPosition').innerHTML = 'Monster6 X position = '+monster6xposition;
+        
+        
+    }
+    if(monsterRandomNum == 3){
+        monster6AttackPlayer();
+       
+        $('#monster6').animate({left: '55.32%', top: '33.5%'}, 1000);
+        monster6xposition = 3;
+        document.getElementById('monster6XPosition').innerHTML = 'Monster6 X position = '+monster6xposition;
+       
+        
+    }
+}
+}
+   
+//monster attacking player
+
+var monster6AttackAnimation = function(){
+    if((gameOverBool == false)&&(monster6OnField == true)){
+    $('#monster6').animate({top:'20.5%'},250);
+    $('#monster6').animate({top:'31.5%'},250);
+    slimeAttack = new Audio('sfx/slimeAttack.wav');
+    slimeAttack.play();
+    }
+}
+
+var monster6AttackPlayer = function(){
+    if((gameOverBool == false)&&(monster6OnField == true)){
+    var willMonster6Attack = Math.floor(Math.random()*3+1);
+    if((((playerPositionX >= 1210)&&(playerPositionX <= 1420))&&(monster6xposition == 1))&&(willMonster6Attack >= 2)){  
+        monster6AttackAnimation();
+        setTimeout(playerIsHitAnimation,500);
+        setTimeout(playerLosesHeart,500);
+    }
+    
+    if((((playerPositionX >= 1320)&&(playerPositionX <= 1500))&&(monster6xposition == 2))&&(willMonster6Attack >= 2)){
+        monster6AttackAnimation();
+        setTimeout(playerIsHitAnimation,500);
+        setTimeout(playerLosesHeart,500);
+    }
+    if((((playerPositionX >= 1110)&&(playerPositionX <= 1310))&&(monster6xposition == 3))&&(willMonster6Attack >= 2)){
+        monster6AttackAnimation();
+        setTimeout(playerIsHitAnimation,500);
+        setTimeout(playerLosesHeart,500);
+    }
+    
+}
+}
+
+
+//PLAYER VS MON 6 // PLAYER VS MON 6//
+
+
+
+//hiScore After Death
+
+var hiScoreFunc = function(){
+    if(playerScore > playerHiScore){
+    playerHiScore = playerScore;    
+    document.getElementById('hiScoreNum').innerHTML = playerHiScore;
+}
+}
+//gameOver
+var playerPositionNull = function(){
+    playerPositionX = 0;
+    $('#player1').fadeOut(1);
+}
+
+var gameOverTextFadeIn = function(){
+    $('#gameOver').fadeIn(1500);
+}
+
+var delayScoreBack = function(){
+    playerScore = 0;
+    document.getElementById('scoreNum').innerHTML = playerScore;
+}
+
+var delayDiamonds = function(){
+    diamondOnField1 = false;
+    diamondOnField2 = false;
+    diamondOnField3 = false;
+    diamondOnField4 = false;
+    diamondOnField5 = false;
+    $('.diamonds').hide();
+}
+
+//lets make island float, ok?//
+        
+var islandFloatDown = function(){
+$('#wrapper').animate({top:'+=10px'},2000);    
+$('#wrapper').animate({top:'-=10px'},2000);     
+}             
+
+var islandFloat = function(){
+    setInterval(islandFloatDown,2100);
+    setInterval(islandFloatUp,2100);
+}
+
+var gameOverBool = false;
+        
+var restartGame = function(){
+    playerPositionX = 0;
+    $('#player1').css('left','35%');
+    $('#player1').css('top','12%');
+    
+    monster1hp = 0;
+    monster1dies();
+    monster2hp = 0;
+    monster2dies();
+    monster3hp = 0;
+    monster3dies();
+    monster4hp = 0;
+    monster4dies();
+    monster5hp = 0;
+    monster5dies();
+    monster6hp = 0;
+    monster6dies();
+    landWeight = 0;
+    landWeightMonsterCount = 0;
+    document.getElementById('monsterCount').innerHTML = 'Monster Count: '+landWeightMonsterCount;
+    document.getElementById('weightNum').innerHTML = landWeight+'%';
+    document.getElementById('scoreNum').innerHTML = playerScore;
+    $('#monster1').hide();
+    $('#monster2').hide();
+    $('#monster3').hide();
+    $('#monster4').hide();
+    $('#monster5').hide();
+    $('#monster6').hide();
+    
+    playerHeartValue = 3;
+    $('.hearts').css('opacity','1');
+    
+    $('#gameOver').fadeOut(1);
+    $('#theLand').css('top','37%');
+    $('#tree').css('top','2%');
+    $('#snowMan').css('top','9%');
+    $('#flame1').css('top','-2%');
+    $('#flame2').css('top','2%');
+    $('#flame3').css('top','15%');
+    $('#flame4').css('top','17%');
+    $('#birds').css('top','-3%');
+    $('#player1').css('top','12%');
+    $('#diamond1').css('top','33.7%');
+    $('#diamond2').css('top','35%');
+    $('#diamond3').css('top','35.8%');
+    $('#diamond4').css('top','36.3%');
+    $('#diamond5').css('top','34.3%');
+    $('#theLand').fadeIn(1000);
+    $('#tree').fadeIn(1000);
+    $('#birds').fadeIn(1000);
+    $('#player1').fadeIn(1000);
+    $('.diamonds').fadeIn(1000);
+    $('.hearts').fadeIn(1000);
+    diamondOnField1 = false;
+    diamondOnField2 = false;
+    diamondOnField3 = false;
+    diamondOnField4 = false;
+    diamondOnField5 = false;
+    
+    playerCurrentZone = 1;
+    
+    gameOverBool = false;
+    setTimeout(delayScoreBack,300);
+    setTimeout(delayDiamonds,300);
+    setTimeout(delayScoreBack,500);
+    setTimeout(delayDiamonds,500);
+    setTimeout(delayScoreBack,1000);
+    setTimeout(delayDiamonds,1000);
+    hiScoreFunc();
+    playerScore = 0;
+    
+    worldType = 'grass';
+    bubbleType = 'none';
+    worldTypeChange();
+}        
+
+var gameOver = function(){
+    diamondOnField1 = false;
+    diamondOnField2 = false;
+    diamondOnField3 = false;
+    diamondOnField4 = false;
+    diamondOnField5 = false;
+    bubbleWorldLeaves();
+    monster1hp = 0;
+    monster1dies();
+    monster2hp = 0;
+    monster2dies();
+    monster3hp = 0;
+    monster3dies();
+    monster4hp = 0;
+    monster4dies();
+    monster5hp = 0;
+    monster5dies();
+    monster6hp = 0;
+    monster6dies();
+    gameOverBool = true;
+    var worldType = 'grass';
+    var bubbleType = 'none';
+    $('#theLand').animate({top:'75%'},1000);
+    $('#tree').animate({top:'40%'},1000);
+    $('.flames').animate({top:'50%'},1000);
+    $('#snowMan').animate({top:'50%'},1000);
+    $('#birds').animate({top:'35%'},1000);
+    $('#player1').animate({top:'50%'},1000);
+    $('.diamonds').animate({top:'40%'},1000);
+    $('#theLand').fadeOut(1000);
+    $('#snowMan').fadeOut(1000);
+    $('.flames').fadeOut(500);
+    $('#tree').fadeOut(1000);
+    $('#birds').fadeOut(1000);
+    $('#player1').fadeOut(1000);
+    $('#monster1').fadeOut(1000);
+    $('#monster2').fadeOut(1000);
+    $('#monster3').fadeOut(1000);
+    $('#monster4').fadeOut(1000);
+    $('#monster5').fadeOut(1000);
+    $('#monster6').fadeOut(1000);
+    $('.diamonds').fadeOut(1000);
+    $('.hearts').fadeOut(1000);
+    setTimeout(playerPositionNull,1000);
+    monster1OnFieldnField = false;
+    monster2OnFieldnField = false;
+    monster3OnFieldnField = false;
+    monster4OnFieldnField = false;
+    monster5OnFieldnField = false;
+    monster6OnFieldnField = false;
+    setTimeout(gameOverTextFadeIn,1200);
+    setTimeout(restartGame,5000);
+}
+
+
+
+//switching between zones//
+    
+    $(document).ready(function(){  
+     gameLoop();  
+    $('#gameOver').hide();
+    $('.diamonds').hide();
+    $('#bubbleWorldMorph').hide();    
+    $('#atkNum').hide();   
+    $('#monster1').hide(); 
+    $('#monster2').hide();
+    $('#monster3').hide(); 
+    $('#monster4').hide();
+    $('#monster5').hide(); 
+    $('#monster6').hide();    
+        
+ 
+    
+    worldTypeChange();
+        
+    setInterval(islandFloatDown,4100);  
+    
+    setInterval(diamondFuncComplete,5000);
+    setInterval(pickUpDiamond1,1);    
+      
+    setInterval(playerFacingFuncL,300);
+    setInterval(playerFacingFuncR,300);     
+    
+    setInterval(bubbleWorldAppears,10000);    
+    setInterval(landingOnMorphBubble,1);    
+    
+    setInterval(mon1Interval,10000);    
+    setInterval(monster1RandomMovement,4000);
+    setInterval(mon2Interval,10000);    
+    setInterval(monster2RandomMovement,6000);
+    setInterval(mon3Interval,10000);    
+    setInterval(monster3RandomMovement,6000);      
+    setInterval(mon4Interval,10000);    
+    setInterval(monster4RandomMovement,6000);  
+    setInterval(mon5Interval,10000);    
+    setInterval(monster5RandomMovement,6000);  
+    setInterval(mon6Interval,10000);    
+    setInterval(monster6RandomMovement,6000);      
+    
+    setInterval(monsterWeightGoesUp,1000);
+        
+    });
+        
+        
+    
+    </script>
+    
+   
+    
+    </body>
+</html>

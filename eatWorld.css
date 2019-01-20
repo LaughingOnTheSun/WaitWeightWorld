@@ -1,0 +1,341 @@
+body{
+    
+    background-color:black;
+    font-family: 'VT323', monospace;
+}
+
+#player1{
+position:absolute;
+left:35%;
+top:12%; 
+margin-left:auto;
+margin-right:auto;
+margin-top:10%;    
+}
+
+#charPicture{
+position:absolute;
+left:44%;
+top:-17%; 
+margin-left:auto;
+margin-right:auto;
+margin-top:10%;  
+}
+
+#bubbleWorldMorph{
+position:absolute;
+left:52.5%;
+top:16%; 
+margin-left:auto;
+margin-right:auto;
+margin-top:10%;   
+}
+
+#atkNum{
+  position:absolute;
+left:65%;
+top:11.5%; 
+margin-left:auto;
+margin-right:auto;
+margin-top:-40%; 
+color:yellow;  
+font-weight:500;    
+font-size:300%;    
+}
+
+.monsterSet1{
+position:absolute;
+left:35%;
+top:31.5%; 
+margin-left:auto;
+margin-right:auto;
+
+}
+
+.monsterSet2{
+    position:absolute;
+    left:55.32%;
+    top:32.5%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+
+#theLand{
+    position:absolute;
+    left:36.5%;
+    top:37%;
+     margin-left:auto;
+    margin-right:auto;
+    margin-top:auto;
+}
+
+#wrapper {
+    position:relative;
+    margin-left:auto;
+    margin-right:auto;
+    width:1820px;
+    height:920px;
+max-width:1820px;
+min-width:1820px;
+max-height:920px;
+min-height:920px;
+
+}
+
+#birds{
+    position:absolute;
+left:42%;
+top:-3%; 
+margin-left:auto;
+margin-right:auto;
+margin-top:10%;
+}
+
+#tree{
+ position:absolute;
+left:39.5%;
+top:2%; 
+margin-left:auto;
+margin-right:auto;
+margin-top:10%;    
+}
+
+#snowMan{
+position:absolute;
+left:46%;
+top:9%; 
+margin-left:auto;
+margin-right:auto;
+margin-top:10%;    
+}
+
+.flames{
+position:absolute;
+left:40%;
+top:1%; 
+margin-left:auto;
+margin-right:auto;
+margin-top:10%;      
+}
+
+#flame1{
+position:absolute;
+left:40%;
+top:-2%; 
+margin-left:auto;
+margin-right:auto;
+margin-top:10%;    
+}
+
+#flame2{
+left:44%;
+top:2%; 
+}
+
+#flame3{
+left:59%;
+top:15%; 
+}
+
+#flame4{
+left:37%;
+top:17%; 
+}
+
+.hearts{
+    position:absolute;
+    height:8%;
+    top:10%;
+    left:50%;
+}
+
+#heart2{
+    height:5%;
+    left:50.8%;
+    top:11.5%;
+}
+
+#heart3{
+    height:2%;
+    left:51.56%;
+    top:13%;
+}
+
+.positionText{
+    color:white;
+}
+
+.diamonds{
+    position:absolute;
+}
+
+#diamond1{
+    left:37%;
+    top:33.7%;
+}
+
+#diamond2{
+    left:43%;
+    top:35%;
+}
+
+#diamond3{
+    left:50%;
+    top:35.8%;
+}
+
+#diamond4{
+    left:55%;
+    top:36.3%;
+}
+
+#diamond5{
+    left:60.5%;
+    top:34.3%;
+}
+
+#score{
+    position:absolute;
+    color:white;
+    left:47%;
+    top:11%;
+    font-size:250%;
+}
+
+#scoreNum{
+    position:absolute;
+    color:white;
+    top:16%;
+    left:41.2%;
+    font-size:200%; 
+    width:100px;
+    height:100px;
+max-width:300px;
+min-width:300px;
+max-height:100px;
+min-height:100px;
+    text-align:center;
+}
+
+#weight{
+    position:absolute;
+    color:white;
+    left:53%;
+    top:11%;
+    font-size:250%;
+}
+
+#weightNum{
+    position:absolute;
+    color:white;
+    top:16%;
+    left:52.3%;
+    font-size:200%; 
+    width:100px;
+    height:100px;
+max-width:120px;
+min-width:120px;
+max-height:100px;
+min-height:100px;
+    text-align:center;
+}
+
+
+
+#hiScore{
+    position:absolute;
+    color:yellow;
+    top:-3%;
+    left:48.4%;
+    font-size:300%;
+    
+}
+
+#hiScoreNum{
+    position:absolute;
+    color:yellow;
+    top:1.5%;
+    left:35%;
+    font-size:300%; 
+    width:100px;
+    height:100px;
+max-width:500px;
+min-width:500px;
+max-height:100px;
+min-height:100px;
+    padding-left:4%;
+    text-align:center;
+    
+
+}
+
+.positionText{
+    position:absolute;
+    top:0%;
+}
+
+#playerXPosition{
+    top:2%;
+}
+
+#monster1XPosition{
+    top:8%;
+}
+
+#monster1HP{
+    top:10%;
+}
+
+#monster2XPosition{
+    top:14%;
+}
+
+#monster2HP{
+    top:16%;
+}
+#monster3XPosition{
+    top:20%;
+}
+
+#monster3HP{
+    top:22%;
+}
+
+#monster4XPosition{
+    top:26%;
+}
+
+#monster4HP{
+    top:28%;
+}
+
+#monster5XPosition{
+    top:32%;
+}
+
+#monster5HP{
+    top:34%;
+}
+#monster6XPosition{
+    top:38%;
+}
+
+#monster6HP{
+    top:40%;
+}
+
+
+#monsterCount{
+    top:80%;
+}
+
+#gameOver{
+    color:red;
+    position:absolute;
+    top:20%;
+    left:47%;
+    font-size:750%;
+
+}
+
